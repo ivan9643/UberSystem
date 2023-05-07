@@ -20,6 +20,7 @@ class User {
 	bool IsNameValid(const String& name) const;
 
 public:
+	User() = default;
 	User(const String& username, const String& password, const String& firstName, const String& lastName, double money);
 
 	const String& GetUsername() const;

@@ -25,6 +25,9 @@ public:
 
 	const char* c_str() const;
 
+	void SaveToFile(std::ofstream& file);
+	void ReadFromFile(std::ifstream& file);
+
 	~String();
 
 	friend bool operator==(const String& lhs, const String& rhs);

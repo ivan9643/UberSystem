@@ -1,4 +1,5 @@
 #include <cstring>
+#include <fstream>
 #include <iostream>
 #include "String.h"
 
@@ -99,6 +100,20 @@ void String::clear()
 const char* String::c_str() const
 {
 	return data;
+}
+
+void String::SaveToFile(std::ofstream& file)
+{
+	file.write((const char*)&length, sizeof(length));
+	file.write((const char*)data, length + 1);
+}
+
+void String::ReadFromFile(std::ifstream& file)
+{
+	Free();
+	file.read((char*)&length, sizeof(length));
+	data = new char[length + 1];
+	file.read((char*)data, length + 1);
 }
 
 String::String()

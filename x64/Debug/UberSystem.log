@@ -1,7 +1,2 @@
-﻿  Client.cpp
-  Driver.cpp
-  String.cpp
-  UberSystem.cpp
-  User.cpp
-  Generating Code...
+﻿  main.cpp
   UberSystem.vcxproj -> C:\Users\Acer\source\repos\UberSystem\x64\Debug\UberSystem.exe

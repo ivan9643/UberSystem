@@ -37,7 +37,7 @@ bool User::IsNameValid(const String& name) const
 	if (name.GetLength() < 3) throw std::runtime_error(errorMessage.c_str());
 	if (name.GetLength() > 25) throw std::runtime_error(errorMessage.c_str());
 	if (!IsUpper(name[0])) throw std::runtime_error(errorMessage.c_str());
-	for (size_t i = 0; i < name.GetLength(); i++)
+	for (size_t i = 1; i < name.GetLength(); i++)
 	{
 		if (!IsLower(name[i])) throw std::runtime_error(errorMessage.c_str());
 	}
@@ -90,4 +90,22 @@ void User::SetLastName(const String& lastName)
 void User::SetMoney(double money)
 {
 	if (money >= 0) this->money = money;
+}
+
+void User::SaveToFile(std::ofstream& file)
+{
+	username.SaveToFile(file);
+	firstName.SaveToFile(file);
+	lastName.SaveToFile(file);
+	file.write((const char*)&passHash, sizeof(passHash));
+	file.write((const char*)&money, sizeof(money));
+}
+
+void User::ReadFromFile(std::ifstream& file)
+{
+	username.ReadFromFile(file);
+	firstName.ReadFromFile(file);
+	lastName.ReadFromFile(file);
+	file.read((char*)&passHash, sizeof(passHash));
+	file.read((char*)&money, sizeof(money));
 }
