@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include "String.h"
+#include "HelperFunctions.h"
 
 void String::CopyFrom(const String& other)
 {
@@ -119,6 +120,18 @@ void String::ReadFromFile(std::ifstream& file)
 String::String()
 {
 	data = new char[1] {};
+}
+
+String::String(size_t n)
+{
+	length = GetDigitsCount(n);
+	data = new char[length + 1];
+	for (int i = length - 1; i >= 0; i--)
+	{
+		data[i] = (n % 10) + '0';
+		n /= 10;
+	}
+	data[length] = '\0';
 }
 
 String::String(const char* str)

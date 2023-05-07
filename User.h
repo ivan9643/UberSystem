@@ -7,12 +7,16 @@ enum class Property {
 	password,
 };
 
+const size_t MIN_LENGTH = 3;
+const size_t MAX_LENGTH = 25; 
+//used for username, password, first and last name
+
 class User {
 	String username;
 	String firstName;
 	String lastName;
-	size_t passHash;
-	double money;
+	size_t passHash = 0;
+	double money = 0;
 
 	void SetPassHash(const String& password);
 

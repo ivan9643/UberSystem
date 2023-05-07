@@ -10,4 +10,6 @@ class Address {
 	String name;
 	String details;
 	Point coodinates;
+
+
 };

@@ -18,10 +18,10 @@ bool User::IsUsernameOrPasswordValid(const String& username, Property property) 
 		propertyStr = "password";
 		break;
 	}
-	String errorMessage = propertyStr + " length must be in [3, 25]\n" + 
-		propertyStr + " must contain only letters, digits, dots (.) and underscores (_)" ;
-	if (username.GetLength() < 3) throw std::runtime_error(errorMessage.c_str());
-	if (username.GetLength() > 25) throw std::runtime_error(errorMessage.c_str());
+	String errorMessage = propertyStr + " length must be in [" + String(MIN_LENGTH) + ", " + String(MAX_LENGTH) + "]\n" +
+		propertyStr + " must contain only letters, digits, dots (.) and underscores (_)";
+	if (username.GetLength() < MIN_LENGTH) throw std::runtime_error(errorMessage.c_str());
+	if (username.GetLength() > MAX_LENGTH) throw std::runtime_error(errorMessage.c_str());
 	for (size_t i = 0; i < username.GetLength(); i++)
 	{
 		char cur = username[i];
@@ -33,9 +33,10 @@ bool User::IsUsernameOrPasswordValid(const String& username, Property property) 
 
 bool User::IsNameValid(const String& name) const
 {
-	String errorMessage = "name length must be in [3, 25]\nname must start with uppercase letter";
-	if (name.GetLength() < 3) throw std::runtime_error(errorMessage.c_str());
-	if (name.GetLength() > 25) throw std::runtime_error(errorMessage.c_str());
+	String errorMessage = "name length must be in [" + String(MIN_LENGTH) + ", " + String(MAX_LENGTH) + "]\n"
+		"name must start with an uppercase letter and the rest must be lowercase";
+	if (name.GetLength() < MIN_LENGTH) throw std::runtime_error(errorMessage.c_str());
+	if (name.GetLength() > MAX_LENGTH) throw std::runtime_error(errorMessage.c_str());
 	if (!IsUpper(name[0])) throw std::runtime_error(errorMessage.c_str());
 	for (size_t i = 1; i < name.GetLength(); i++)
 	{
@@ -50,6 +51,7 @@ User::User(const String& username, const String& password, const String& firstNa
 	SetPassHash(password);
 	SetFirstName(firstName);
 	SetLastName(lastName);
+	SetMoney(money);
 }
 
 const String& User::GetUsername() const

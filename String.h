@@ -8,6 +8,7 @@ class String {
 	void Free();
 public:
 	String();
+	String(size_t n);
 	String(const char* str);
 	String(const String& other);
 	String(String&& other) noexcept;
