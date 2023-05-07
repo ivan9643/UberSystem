@@ -9,7 +9,7 @@ void String::CopyFrom(const String& other)
 	strcpy_s(data, length + 1, other.data);
 }
 
-void String::CopyFrom(String&& other)
+void String::MoveFrom(String&& other)
 {
 	length = other.length;
 	data = other.data;
@@ -27,9 +27,9 @@ String::String(const String& other)
 	CopyFrom(other);
 }
 
-String::String(String&& other)
+String::String(String&& other) noexcept
 {
-	CopyFrom(std::move(other));
+	MoveFrom(std::move(other));
 }
 
 String& String::operator=(const String& other)
@@ -42,12 +42,12 @@ String& String::operator=(const String& other)
 	return *this;
 }
 
-String& String::operator=(String&& other)
+String& String::operator=(String&& other) noexcept
 {
 	if (this != &other)
 	{
 		Free();
-		CopyFrom(std::move(other));
+		MoveFrom(std::move(other));
 	}
 	return *this;
 }
@@ -80,6 +80,11 @@ String::~String()
 	Free();
 }
 
+size_t String::GetLength() const
+{
+	return length;
+}
+
 bool String::empty() const
 {
 	return length == 0;
@@ -94,6 +99,11 @@ void String::clear()
 const char* String::c_str() const
 {
 	return data;
+}
+
+String::String()
+{
+	data = new char[1] {};
 }
 
 String::String(const char* str)

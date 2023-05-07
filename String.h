@@ -1,23 +1,25 @@
 #pragma once
 
 class String {
-	char* data;
-	size_t length;
+	char* data = nullptr;
+	size_t length = 0;
 	void CopyFrom(const String& other);
-	void CopyFrom(String&& other);
+	void MoveFrom(String&& other);
 	void Free();
 public:
+	String();
 	String(const char* str);
 	String(const String& other);
-	String(String&& other);
+	String(String&& other) noexcept;
 
 	String& operator=(const String& other);
-	String& operator=(String&& other);
+	String& operator=(String&& other) noexcept;
 	String operator+=(const String& other);
 
 	char& operator[](size_t index);
 	const char operator[](size_t index) const;
-
+	
+	size_t GetLength() const;
 	bool empty() const;
 	void clear();
 

@@ -2,15 +2,22 @@
 #include <fstream>
 #include "String.h"
 
+enum class Property {
+	username,
+	password,
+};
+
 class User {
 	String username;
-	String password; //check if password hashing is required
 	String firstName;
 	String lastName;
+	size_t passHash;
 	double money;
-	//set password private
-	bool IsUsernameValid(const String&) const;
-	bool IsNameValid(const String&) const;
+
+	void SetPassHash(const String& password);
+
+	bool IsUsernameOrPasswordValid(const String& username, Property property) const; //add bool parameter for error message?
+	bool IsNameValid(const String& name) const;
 
 public:
 	User(const String& username, const String& password, const String& firstName, const String& lastName, double money);

@@ -127,7 +127,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="Driver.cpp" />
+    <ClCompile Include="HelperFunctions.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="String.cpp" />
     <ClCompile Include="UberSystem.cpp" />
+    <ClCompile Include="User.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Address.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="Driver.h" />
+    <ClInclude Include="GlobalConstants.h" />
+    <ClInclude Include="HelperFunctions.h" />
+    <ClInclude Include="Order.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="UberSystem.h" />
+    <ClInclude Include="User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
