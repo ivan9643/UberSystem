@@ -1,4 +1,5 @@
 #pragma once
+#include <fstream>
 #include "User.h"
 #include "Address.h"
 
@@ -15,15 +16,19 @@ class Driver :User {
 	bool IsPhoneNumberValid(const String& phoneNumber);
 
 public:
+	Driver() = default;
+	Driver(const String& username, const String& password, const String& firstName,
+		const String& lastName, double money, const String& carNumber, const String& phoneNumber,
+		const Address& currentLocation);
+
 	const String& GetCarNumber() const;
 	const String& GetPhoneNumber() const;
-
-	void SaveToFile(std::ofstream& file);
-	void ReadFromFile(std::ifstream& file);
+	const Address& GetCurrentLocation() const;
 
 	void SetCarNumber(const String& carNumber);
 	void SetPhoneNumber(const String& phoneNumber);
+	void SetCurrentLocation(const Address& currentLocation);
 
-	Driver(const String& username, const String& password, const String& firstName,
-		const String& lastName, const String& carNumber, const String& phoneNumber, double money);
+	void SaveToFile(std::ofstream& file) const;
+	void ReadFromFile(std::ifstream& file);
 };

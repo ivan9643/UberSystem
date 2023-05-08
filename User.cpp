@@ -94,7 +94,7 @@ void User::SetMoney(double money)
 	if (money >= 0) this->money = money;
 }
 
-void User::SaveToFile(std::ofstream& file)
+void User::SaveToFile(std::ofstream& file) const
 {
 	username.SaveToFile(file);
 	firstName.SaveToFile(file);

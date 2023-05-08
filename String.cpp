@@ -103,7 +103,7 @@ const char* String::c_str() const
 	return data;
 }
 
-void String::SaveToFile(std::ofstream& file)
+void String::SaveToFile(std::ofstream& file) const
 {
 	file.write((const char*)&length, sizeof(length));
 	file.write((const char*)data, length + 1);

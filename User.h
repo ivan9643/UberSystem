@@ -37,6 +37,6 @@ public:
 	void SetLastName(const String& lastName);
 	void SetMoney(double money);
 
-	void SaveToFile(std::ofstream& file);
+	void SaveToFile(std::ofstream& file) const;
 	void ReadFromFile(std::ifstream& file);
 };

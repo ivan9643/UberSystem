@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Address.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Driver.cpp" />
     <ClCompile Include="HelperFunctions.cpp" />

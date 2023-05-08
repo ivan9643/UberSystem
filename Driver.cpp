@@ -1,4 +1,3 @@
-#include <fstream>
 #include "Driver.h"
 #include "HelperFunctions.h"
 
@@ -39,12 +38,25 @@ const String& Driver::GetPhoneNumber() const
 	return phoneNumber;
 }
 
-void Driver::SaveToFile(std::ofstream& file) {
+const Address& Driver::GetCurrentLocation() const
+{
+	return currentLocation;
+}
 
+void Driver::SaveToFile(std::ofstream& file) const 
+{
+	User::SaveToFile(file);
+	carNumber.SaveToFile(file);
+	phoneNumber.SaveToFile(file);
+	currentLocation.SaveToFile(file);
 }
 
 void Driver::ReadFromFile(std::ifstream& file)
 {
+	User::ReadFromFile(file);
+	carNumber.ReadFromFile(file);
+	phoneNumber.ReadFromFile(file);
+	currentLocation.ReadFromFile(file);
 }
 
 void Driver::SetCarNumber(const String& carNumber)
@@ -57,10 +69,17 @@ void Driver::SetPhoneNumber(const String& phoneNumber)
 	if (IsPhoneNumberValid(phoneNumber)) this->phoneNumber = phoneNumber;
 }
 
+void Driver::SetCurrentLocation(const Address& currentLocation)
+{
+	this->currentLocation = currentLocation;
+}
+
 Driver::Driver(const String& username, const String& password, const String& firstName,
-	const String& lastName, const String& carNumber, const String& phoneNumber, double money)
+	const String& lastName, double money, const String& carNumber, const String& phoneNumber,
+	const Address& currentLocation)
 	:User(username, password, firstName, lastName, money)
 {
 	SetCarNumber(carNumber);
 	SetPhoneNumber(phoneNumber);
+	SetCurrentLocation(currentLocation);
 }
