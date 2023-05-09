@@ -2,7 +2,7 @@
 #include <fstream>
 #include "User.h"
 
-class Client :User {
+class Client : public User {
 
 
 public:

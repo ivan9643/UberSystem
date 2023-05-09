@@ -12,6 +12,7 @@ const size_t MAX_LENGTH = 25;
 //used for username, password, first and last name
 
 class User {
+//protected:
 	String username;
 	String firstName;
 	String lastName;

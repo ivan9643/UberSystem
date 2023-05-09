@@ -146,6 +146,7 @@
     <ClInclude Include="String.h" />
     <ClInclude Include="UberSystem.h" />
     <ClInclude Include="User.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

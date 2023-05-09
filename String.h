@@ -1,5 +1,8 @@
 #pragma once
 
+const size_t MAX_BUFFER_SIZE = 1024;
+//used for operator>>
+
 class String {
 	char* data = nullptr;
 	size_t length = 0;
@@ -31,6 +34,8 @@ public:
 
 	~String();
 
+	friend std::istream& operator>>(std::istream& is, String& str);
+	friend std::ostream& operator<<(std::ostream& os, const String& str);
 	friend bool operator==(const String& lhs, const String& rhs);
 	friend bool operator!=(const String& lhs, const String& rhs);
 	friend bool operator>(const String& lhs, const String& rhs);
@@ -42,6 +47,8 @@ public:
 
 };
 
+std::istream& operator>>(std::istream& is, String& str);
+std::ostream& operator<<(std::ostream& os, const String& str);
 bool operator==(const String& lhs, const String& rhs);
 bool operator!=(const String& lhs, const String& rhs);
 bool operator>(const String& lhs, const String& rhs);

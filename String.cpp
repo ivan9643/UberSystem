@@ -126,7 +126,7 @@ String::String(size_t n)
 {
 	length = GetDigitsCount(n);
 	data = new char[length + 1];
-	for (int i = length - 1; i >= 0; i--)
+	for (int i = (int)(length - 1); i >= 0; i--) //casting to int because of warning
 	{
 		data[i] = (n % 10) + '0';
 		n /= 10;
@@ -146,6 +146,23 @@ String operator+(const String& lhs, const String& rhs)
 	String result(lhs);
 	result += rhs;
 	return result;
+}
+
+std::istream& operator>>(std::istream& is, String& str)
+{
+	char buff[MAX_BUFFER_SIZE]{};
+	is >> buff;
+	str.Free();
+	str.length = strlen(buff);
+	str.data = new char[str.length + 1];
+	strcpy_s(str.data, str.length + 1, buff);
+	return is;
+}
+
+std::ostream& operator<<(std::ostream& os, const String& str)
+{
+	os << str.data;
+	return os;
 }
 
 bool operator==(const String& lhs, const String& rhs)

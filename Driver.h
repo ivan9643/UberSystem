@@ -7,7 +7,7 @@ const size_t MIN_CAR_NUMBER_LENGTH = 3;
 const size_t MAX_CAR_NUMBER_LENGTH = 10;
 const size_t PHONE_NUMBER_LENGTH = 10;
 
-class Driver :User {
+class Driver : public User {
 	String carNumber;
 	String phoneNumber;
 	Address currentLocation;
