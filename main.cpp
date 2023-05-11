@@ -1,8 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "Client.h"
-#include "Driver.h"
-#include "Vector.h"
+#include "UberSystem.h"
 
 int main()
 {
@@ -24,10 +22,8 @@ int main()
 	//std::ifstream file2("file.txt", std::ios::binary);
 	//d2.ReadFromFile(file2);
 	//file2.close();
-	Vector<int> vb;
-	vb.PopBack();
-	if (true)
-	{
+	//Vector<Order> v;
+	UberSystem us;
+	us.NotLoggedIn();
 
-	}
 }

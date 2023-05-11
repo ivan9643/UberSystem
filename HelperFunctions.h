@@ -1,6 +1,6 @@
 #pragma once
 
-size_t Hash(const char* str);
+size_t HashPassword(const char* str);
 bool IsLetter(char ch);
 bool IsDigit(char ch);
 bool IsUpper(char ch);

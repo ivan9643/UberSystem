@@ -167,7 +167,7 @@ template<typename T>
 inline void Vector<T>::PushBack(const T el)
 {
 	if (currentSize == capacity) Resize(capacity * 2);
-	arr[capacity++] = el;
+	arr[currentSize++] = el;
 }
 
 template<typename T>

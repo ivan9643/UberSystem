@@ -2,6 +2,9 @@
 #include <fstream>
 #include "User.h"
 #include "Address.h"
+#include "Vector.h"
+
+struct Order;
 
 const size_t MIN_CAR_NUMBER_LENGTH = 3;
 const size_t MAX_CAR_NUMBER_LENGTH = 10;
@@ -19,6 +22,7 @@ class Driver : public User {
 	String phoneNumber;
 	Address currentLocation;
 	Rating rating;
+	Vector<Order*> pendingOrders; //make functions for orders ...
 
 	bool IsCarNumberValid(const String& carNumber);
 	bool IsPhoneNumberValid(const String& phoneNumber);
@@ -39,6 +43,6 @@ public:
 
 	void Rate(double value);
 
-	void SaveToFile(std::ofstream& file) const;
-	void ReadFromFile(std::ifstream& file);
+	void SaveToFile(std::ofstream& file) const override;
+	void ReadFromFile(std::ifstream& file) override;
 };

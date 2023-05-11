@@ -3,7 +3,7 @@
 
 void User::SetPassHash(const String& password)
 {
-	if (IsUsernameOrPasswordValid(password, Property::password)) passHash = Hash(password.c_str());;
+	if (IsUsernameOrPasswordValid(password, Property::password)) passHash = HashPassword(password.c_str());;
 }
 
 bool User::IsUsernameOrPasswordValid(const String& username, Property property) const
@@ -67,6 +67,11 @@ const String& User::GetFirstName() const
 const String& User::GetLastName() const
 {
 	return lastName;
+}
+
+size_t User::GetPassHash() const
+{
+	return passHash;
 }
 
 double User::GetMoney() const

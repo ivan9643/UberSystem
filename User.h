@@ -21,7 +21,7 @@ protected:
 
 	void SetPassHash(const String& password);
 
-	bool IsUsernameOrPasswordValid(const String& username, Property property) const; //add bool parameter for error message?
+	bool IsUsernameOrPasswordValid(const String& username, Property property) const;
 	bool IsNameValid(const String& name) const;
 
 public:
@@ -31,13 +31,14 @@ public:
 	const String& GetUsername() const;
 	const String& GetFirstName() const;
 	const String& GetLastName() const;
+	size_t GetPassHash() const;
 	double GetMoney() const;
 
-	void SetUsername(const String& username); // add bool parameter for error message?
+	void SetUsername(const String& username);
 	void SetFirstName(const String& firstName);
 	void SetLastName(const String& lastName);
 	void SetMoney(double money);
 
-	void SaveToFile(std::ofstream& file) const;
-	void ReadFromFile(std::ifstream& file);
+	virtual void SaveToFile(std::ofstream& file) const;
+	virtual void ReadFromFile(std::ifstream& file);
 };

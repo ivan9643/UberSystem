@@ -1,5 +1,10 @@
 #include "Address.h"
 
+Address::Address(const Point& coordinates)
+{
+	this->coodinates = coordinates;
+}
+
 Address::Address(const String& name, const String& details, const Point& coordinates)
 {
 	this->name = name;

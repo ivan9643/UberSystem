@@ -1,7 +1,7 @@
 #include "HelperFunctions.h"
 
 //http://www.cse.yorku.ca/~oz/hash.html
-size_t Hash(const char* str)
+size_t HashPassword(const char* str)
 {
 	unsigned long hash = 5381;
 	int c;

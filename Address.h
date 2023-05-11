@@ -16,6 +16,7 @@ struct Address {
 	Point coodinates;
 
 	Address() = default;
+	Address(const Point& coordinates);
 	Address(const String& name, const String& details, const Point& coordinates);
 
 	void SaveToFile(std::ofstream& file) const;

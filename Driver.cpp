@@ -43,7 +43,7 @@ const Address& Driver::GetCurrentLocation() const
 	return currentLocation;
 }
 
-void Driver::SaveToFile(std::ofstream& file) const 
+void Driver::SaveToFile(std::ofstream& file) const
 {
 	User::SaveToFile(file);
 	carNumber.SaveToFile(file);

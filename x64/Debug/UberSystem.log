@@ -1,6 +1,12 @@
-﻿  Order.cpp
+﻿  Client.cpp
+  Driver.cpp
+  HelperFunctions.cpp
+  Order.cpp
+  String.cpp
   UberSystem.cpp
+C:\Users\Acer\source\repos\UberSystem\UberSystem\UberSystem.cpp(16,12): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Acer\source\repos\UberSystem\UberSystem\UberSystem.cpp(23,12): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   User.cpp
+  main.cpp
   Generating Code...
-UberSystem.obj : error LNK2019: unresolved external symbol "public: void __cdecl Order::ReadFromFile(class std::basic_ifstream<char,struct std::char_traits<char> > &)" (?ReadFromFile@Order@@QEAAXAEAV?$basic_ifstream@DU?$char_traits@D@std@@@std@@@Z) referenced in function "public: void __cdecl UberSystem::ReadDataFromFile(void)" (?ReadDataFromFile@UberSystem@@QEAAXXZ)
-C:\Users\Acer\source\repos\UberSystem\x64\Debug\UberSystem.exe : fatal error LNK1120: 1 unresolved externals
+  UberSystem.vcxproj -> C:\Users\Acer\source\repos\UberSystem\x64\Debug\UberSystem.exe
