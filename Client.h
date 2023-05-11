@@ -6,5 +6,5 @@ class Client : public User {
 
 
 public:
-
+	void AddMoney(double money);
 };

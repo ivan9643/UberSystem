@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 
 template<typename T>
 class Vector {
@@ -34,6 +35,7 @@ public:
 	void Swap(size_t i, size_t j);
 
 	~Vector();
+	friend class UberSystem;
 };
 
 template<typename T>

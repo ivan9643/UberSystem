@@ -7,10 +7,18 @@ const size_t MIN_CAR_NUMBER_LENGTH = 3;
 const size_t MAX_CAR_NUMBER_LENGTH = 10;
 const size_t PHONE_NUMBER_LENGTH = 10;
 
+struct Rating {
+	double value = 0;
+	size_t votesCount = 0;
+	
+	void AddVote(double value);
+};
+
 class Driver : public User {
 	String carNumber;
 	String phoneNumber;
 	Address currentLocation;
+	Rating rating;
 
 	bool IsCarNumberValid(const String& carNumber);
 	bool IsPhoneNumberValid(const String& phoneNumber);
@@ -28,6 +36,8 @@ public:
 	void SetCarNumber(const String& carNumber);
 	void SetPhoneNumber(const String& phoneNumber);
 	void SetCurrentLocation(const Address& currentLocation);
+
+	void Rate(double value);
 
 	void SaveToFile(std::ofstream& file) const;
 	void ReadFromFile(std::ifstream& file);

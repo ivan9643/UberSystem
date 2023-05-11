@@ -51,6 +51,12 @@ void Driver::SaveToFile(std::ofstream& file) const
 	currentLocation.SaveToFile(file);
 }
 
+void Driver::Rate(double value)
+{
+	if (value < 1 || value > 5) throw std::runtime_error("rating must be in [1, 5]");
+	rating.AddVote(value);
+}
+
 void Driver::ReadFromFile(std::ifstream& file)
 {
 	User::ReadFromFile(file);
@@ -82,4 +88,11 @@ Driver::Driver(const String& username, const String& password, const String& fir
 	SetCarNumber(carNumber);
 	SetPhoneNumber(phoneNumber);
 	SetCurrentLocation(currentLocation);
+}
+
+void Rating::AddVote(double value)
+{
+	if (votesCount == 0) this->value = value;
+	else this->value = (votesCount * this->value + value) / (votesCount + 1);
+	votesCount++;
 }

@@ -39,6 +39,9 @@
     <ClCompile Include="Address.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h">

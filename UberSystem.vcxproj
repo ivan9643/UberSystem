@@ -132,6 +132,7 @@
     <ClCompile Include="Driver.cpp" />
     <ClCompile Include="HelperFunctions.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Order.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="UberSystem.cpp" />
     <ClCompile Include="User.cpp" />

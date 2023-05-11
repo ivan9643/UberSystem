@@ -1,11 +1,15 @@
 #pragma once
 #include "Driver.h"
 
-class Order {
-	Address current;
+struct Order {
+	static size_t nextId;
+	Address currentLocation;
 	Address destination;
 	size_t passengersCount = 0;
-	size_t id; // think of a way to generate unique ids
+	size_t id;
 	Driver* driver = nullptr;
-	bool IsAccepted = false;
+	bool isAccepted = false;
+
+	void SaveToFile(std::ofstream& file) const;
+	void ReadFromFile(std::ifstream& file);
 };

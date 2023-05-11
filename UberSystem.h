@@ -2,20 +2,16 @@
 #include "Client.h"
 #include "Driver.h"
 #include "Order.h"
+#include "Vector.h"
 
 const char DATA_FILE_NAME[] = "data.txt";
 
 class UberSystem {
-	Client* clients= nullptr;
-	Driver* drivers = nullptr;
-	Order* orders = nullptr;
+	Vector<Client> clients;
+	Vector<Driver> drivers;
+	Vector<Order> orders;
 	// check if it is needed to save completed orders
-	size_t clientsCount = 0;
-	size_t driversCount = 0;
-	size_t ordersCount = 0;
 
-	void Free();
-	
 public:
 	UberSystem();
 
@@ -24,6 +20,4 @@ public:
 	
 	void SaveDataInFile();
 	void ReadDataFromFile();
-
-	~UberSystem();
 };
