@@ -2,7 +2,7 @@
 #include <fstream>
 #include "User.h"
 #include "Address.h"
-#include "Vector.h"
+#include "MyVector.hpp"
 
 struct Order;
 
@@ -18,27 +18,27 @@ struct Rating {
 };
 
 class Driver : public User {
-	String carNumber;
-	String phoneNumber;
+	MyString carNumber;
+	MyString phoneNumber;
 	Address currentLocation;
 	Rating rating;
-	Vector<Order*> pendingOrders; //make functions for orders ...
+	MyVector<Order*> pendingOrders; //make functions for orders ...
 
-	bool IsCarNumberValid(const String& carNumber);
-	bool IsPhoneNumberValid(const String& phoneNumber);
+	bool IsCarNumberValid(const MyString& carNumber);
+	bool IsPhoneNumberValid(const MyString& phoneNumber);
 
 public:
 	Driver() = default;
-	Driver(const String& username, const String& password, const String& firstName,
-		const String& lastName, double money, const String& carNumber, const String& phoneNumber,
+	Driver(const MyString& username, const MyString& password, const MyString& firstName,
+		const MyString& lastName, double money, const MyString& carNumber, const MyString& phoneNumber,
 		const Address& currentLocation);
 
-	const String& GetCarNumber() const;
-	const String& GetPhoneNumber() const;
+	const MyString& GetCarNumber() const;
+	const MyString& GetPhoneNumber() const;
 	const Address& GetCurrentLocation() const;
 
-	void SetCarNumber(const String& carNumber);
-	void SetPhoneNumber(const String& phoneNumber);
+	void SetCarNumber(const MyString& carNumber);
+	void SetPhoneNumber(const MyString& phoneNumber);
 	void SetCurrentLocation(const Address& currentLocation);
 
 	void Rate(double value);

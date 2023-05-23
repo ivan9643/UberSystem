@@ -1,14 +1,14 @@
 #include "User.h"
 #include "HelperFunctions.h"
 
-void User::SetPassHash(const String& password)
+void User::SetPassHash(const MyString& password)
 {
 	if (IsUsernameOrPasswordValid(password, Property::password)) passHash = HashPassword(password.c_str());;
 }
 
-bool User::IsUsernameOrPasswordValid(const String& username, Property property) const
+bool User::IsUsernameOrPasswordValid(const MyString& username, Property property) const
 {
-	String propertyStr;
+	MyString propertyStr;
 	switch (property)
 	{
 	case Property::username:
@@ -18,7 +18,7 @@ bool User::IsUsernameOrPasswordValid(const String& username, Property property) 
 		propertyStr = "password";
 		break;
 	}
-	String errorMessage = propertyStr + " length must be in [" + String(MIN_LENGTH) + ", " + String(MAX_LENGTH) + "]\n" +
+	MyString errorMessage = propertyStr + " length must be in [" + MyString(MIN_LENGTH) + ", " + MyString(MAX_LENGTH) + "]\n" +
 		propertyStr + " must contain only letters, digits, dots (.) and underscores (_)";
 	if (username.GetLength() < MIN_LENGTH) throw std::runtime_error(errorMessage.c_str());
 	if (username.GetLength() > MAX_LENGTH) throw std::runtime_error(errorMessage.c_str());
@@ -31,9 +31,9 @@ bool User::IsUsernameOrPasswordValid(const String& username, Property property) 
 	return true;
 }
 
-bool User::IsNameValid(const String& name) const
+bool User::IsNameValid(const MyString& name) const
 {
-	String errorMessage = "name length must be in [" + String(MIN_LENGTH) + ", " + String(MAX_LENGTH) + "]\n"
+	MyString errorMessage = "name length must be in [" + MyString(MIN_LENGTH) + ", " + MyString(MAX_LENGTH) + "]\n"
 		"name must start with an uppercase letter and the rest must be lowercase";
 	if (name.GetLength() < MIN_LENGTH) throw std::runtime_error(errorMessage.c_str());
 	if (name.GetLength() > MAX_LENGTH) throw std::runtime_error(errorMessage.c_str());
@@ -45,7 +45,7 @@ bool User::IsNameValid(const String& name) const
 	return true;
 }
 
-User::User(const String& username, const String& password, const String& firstName, const String& lastName, double money)
+User::User(const MyString& username, const MyString& password, const MyString& firstName, const MyString& lastName, double money)
 {
 	SetUsername(username);
 	SetPassHash(password);
@@ -54,17 +54,17 @@ User::User(const String& username, const String& password, const String& firstNa
 	SetMoney(money);
 }
 
-const String& User::GetUsername() const
+const MyString& User::GetUsername() const
 {
 	return username;
 }
 
-const String& User::GetFirstName() const
+const MyString& User::GetFirstName() const
 {
 	return firstName;
 }
 
-const String& User::GetLastName() const
+const MyString& User::GetLastName() const
 {
 	return lastName;
 }
@@ -79,17 +79,17 @@ double User::GetMoney() const
 	return money;
 }
 
-void User::SetUsername(const String& username)
+void User::SetUsername(const MyString& username)
 {
 	if (IsUsernameOrPasswordValid(username, Property::username)) this->username = username;
 }
 
-void User::SetFirstName(const String& firstName)
+void User::SetFirstName(const MyString& firstName)
 {
 	if (IsNameValid(firstName)) this->firstName = firstName;
 }
 
-void User::SetLastName(const String& lastName)
+void User::SetLastName(const MyString& lastName)
 {
 	if (IsNameValid(lastName)) this->lastName = lastName;
 }

@@ -1,10 +1,10 @@
 #include "Driver.h"
 #include "HelperFunctions.h"
 
-bool Driver::IsCarNumberValid(const String& carNumber)
+bool Driver::IsCarNumberValid(const MyString& carNumber)
 {
-	String errorMessage = "car number length must be in [" + String(MIN_CAR_NUMBER_LENGTH) + ", " +
-		String(MAX_CAR_NUMBER_LENGTH) + "]\ncar number must contain only letters and digits";
+	MyString errorMessage = "car number length must be in [" + MyString(MIN_CAR_NUMBER_LENGTH) + ", " +
+		MyString(MAX_CAR_NUMBER_LENGTH) + "]\ncar number must contain only letters and digits";
 	if (carNumber.GetLength() < MIN_CAR_NUMBER_LENGTH) throw std::runtime_error(errorMessage.c_str());
 	if (carNumber.GetLength() > MAX_CAR_NUMBER_LENGTH) throw std::runtime_error(errorMessage.c_str());
 	for (size_t i = 0; i < carNumber.GetLength(); i++)
@@ -16,9 +16,9 @@ bool Driver::IsCarNumberValid(const String& carNumber)
 	return true;
 }
 
-bool Driver::IsPhoneNumberValid(const String& phoneNumber)
+bool Driver::IsPhoneNumberValid(const MyString& phoneNumber)
 {
-	String errorMessage = "phone number must contain " + String(PHONE_NUMBER_LENGTH) + " digits";
+	MyString errorMessage = "phone number must contain " + MyString(PHONE_NUMBER_LENGTH) + " digits";
 	if (phoneNumber.GetLength() != PHONE_NUMBER_LENGTH) throw std::runtime_error(errorMessage.c_str());
 	for (size_t i = 0; i < phoneNumber.GetLength(); i++)
 	{
@@ -28,12 +28,12 @@ bool Driver::IsPhoneNumberValid(const String& phoneNumber)
 	return true;
 }
 
-const String& Driver::GetCarNumber() const
+const MyString& Driver::GetCarNumber() const
 {
 	return carNumber;
 }
 
-const String& Driver::GetPhoneNumber() const
+const MyString& Driver::GetPhoneNumber() const
 {
 	return phoneNumber;
 }
@@ -65,12 +65,12 @@ void Driver::ReadFromFile(std::ifstream& file)
 	currentLocation.ReadFromFile(file);
 }
 
-void Driver::SetCarNumber(const String& carNumber)
+void Driver::SetCarNumber(const MyString& carNumber)
 {
 	if (IsCarNumberValid(carNumber)) this->carNumber = carNumber;
 }
 
-void Driver::SetPhoneNumber(const String& phoneNumber)
+void Driver::SetPhoneNumber(const MyString& phoneNumber)
 {
 	if (IsPhoneNumberValid(phoneNumber)) this->phoneNumber = phoneNumber;
 }
@@ -80,8 +80,8 @@ void Driver::SetCurrentLocation(const Address& currentLocation)
 	this->currentLocation = currentLocation;
 }
 
-Driver::Driver(const String& username, const String& password, const String& firstName,
-	const String& lastName, double money, const String& carNumber, const String& phoneNumber,
+Driver::Driver(const MyString& username, const MyString& password, const MyString& firstName,
+	const MyString& lastName, double money, const MyString& carNumber, const MyString& phoneNumber,
 	const Address& currentLocation)
 	:User(username, password, firstName, lastName, money)
 {

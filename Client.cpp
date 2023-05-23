@@ -1,6 +1,6 @@
 #include "Client.h"
 
-Client::Client(const String& username, const String& password, const String& firstName, const String& lastName, double money)
+Client::Client(const MyString& username, const MyString& password, const MyString& firstName, const MyString& lastName, double money)
 	:User(username, password, firstName, lastName, money) {}
 
 void Client::AddMoney(double money)

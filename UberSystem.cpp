@@ -7,7 +7,7 @@ using std::cin;
 using std::endl;
 
 
-int UberSystem::IndexByUsername(const String& username, UserType& type) const
+int UberSystem::IndexByUsername(const MyString& username, UserType& type) const
 {
 	for (size_t i = 0; i < clients.currentSize; i++)
 	{
@@ -26,12 +26,62 @@ int UberSystem::IndexByUsername(const String& username, UserType& type) const
 	return -1;
 }
 
-void UberSystem::CheckIfUsernameInUse(const String& username) const {
+void UberSystem::CheckIfUsernameInUse(const MyString& username) const {
 	UserType type = UserType::none;
 	if (IndexByUsername(username, type) != -1) {
-		String errorMessage = "username \"" + username + "\" already in use";
+		MyString errorMessage = "username \"" + username + "\" already in use";
 		throw std::runtime_error(errorMessage.c_str());
 	}
+}
+
+void UberSystem::ReadGeneralUserData(MyString& username, MyString& password, MyString& firstName, MyString& lastName) const
+{
+	ReadData<MyString>("Enter username:", username);
+	ReadData<MyString>("Enter password:", password);
+	ReadData<MyString>("Enter first name:", firstName);
+	ReadData<MyString>("Enter last name:", lastName);
+}
+
+void UberSystem::ReadAdditionalDriverData(MyString& carNumber, MyString& phoneNumber, MyString& addressName, int& x, int& y) const
+{
+	ReadData<MyString>("Enter car number:", carNumber);
+	ReadData<MyString>("Enter phone number:", phoneNumber);
+	ReadData<MyString>("Enter address name:", addressName);
+	ReadData<int>("Enter x coordinate:", x);
+	ReadData<int>("Enter y coordinate:", y);
+}
+
+void UberSystem::AddUser(UserType type, const MyString& username, const MyString& password, const MyString& firstName, const MyString& lastName, const MyString& carNumber, const MyString& phoneNumber, const MyString& addressName, int x, int y)
+{
+	try
+	{
+		CheckIfUsernameInUse(username);
+		switch (type)
+		{
+		case UserType::client:
+			clients.PushBack(Client(username, password, firstName, lastName, 0));
+			break;
+		case UserType::driver:
+			drivers.PushBack(Driver(username, password, firstName, lastName, 0, carNumber, phoneNumber,
+				Address(addressName, { x,y })));
+			break;
+		default:
+			break;
+		}
+	}
+	catch (const std::exception& e)
+	{
+		cout << e.what() << endl << endl;
+	}
+}
+
+
+void UberSystem::LoggedInClient()
+{
+}
+
+void UberSystem::LoggedInDriver()
+{
 }
 
 UberSystem::UberSystem()
@@ -40,43 +90,47 @@ UberSystem::UberSystem()
 }
 
 void UberSystem::NotLoggedIn() {
-	String registration = "Registration:\nfor clients:\nregister client <username> <password> <first_name> <last_name>\n"
-		"for drivers:\nregister driver <username> <password> <first_name> <last_name>\n<car_number> <phone_number> <x_coordinate> <y_coordinate>";
-	String login = "Login:\nlogin <username> <password>";
-	cout << registration << endl;
-	cout << login << endl << endl;
+	MyString menu = "1 - register\n2 - login\n0 - exit";
+	MyString registerMenu = "1 - client\n2 - driver\n0 - back";
+
+	//MyString registration = "Registration:\nfor clients:\nregister client <username> <password> <first_name> <last_name>\n"
+	//	"for drivers:\nregister driver <username> <password> <first_name> <last_name>\n<car_number> <phone_number> <x_coordinate> <y_coordinate>";
+	//MyString login = "Login:\nlogin <username> <password>";
+
 	while (true) {
-		String action, username, password;
+		MyString action, username, password;
+		cout << menu << endl;
 		cin >> action;
-		if (action == "register")
+
+		if (action == "1")
 		{
-			String type, firstName, lastName;
-			cin >> type >> username >> password >> firstName >> lastName;
-			try
+			MyString firstName, lastName;
+			cout << registerMenu << endl;
+			cin >> action;
+
+			if (action == "1")
 			{
-				if (type == "client") {
-					CheckIfUsernameInUse(username);
-					clients.PushBack(Client(username, password, firstName, lastName, 0));
-				}
-				else if (type == "driver") {
-					String carNumber, phoneNumber;
-					int x, y; //secure if user enters letters
-					cin >> carNumber >> phoneNumber >> x >> y;
-					CheckIfUsernameInUse(username);
-					drivers.PushBack(Driver(username, password, firstName, lastName, 0, carNumber, phoneNumber, Address({ x,y })));
-				}
-				else cout << type + " is not a valid type" << endl;
+				ReadGeneralUserData(username, password, firstName, lastName);
+				AddUser(UserType::client, username, password, firstName, lastName);
 			}
-			catch (const std::exception& e) {
-				cout << e.what() << endl << endl;
+			else if (action == "2")
+			{
+				MyString carNumber, phoneNumber, addressName;
+				int x, y;
+				ReadGeneralUserData(username, password, firstName, lastName);
+				ReadAdditionalDriverData(carNumber, phoneNumber, addressName, x, y);
+				AddUser(UserType::driver, username, password, firstName, lastName, carNumber, phoneNumber, addressName, x, y);
 			}
+			else if (action == "0") continue;
+			else cout << action + " is not a valid action" << endl;
 		}
-		else if (action == "login")
+		else if (action == "2")
 		{
-			cin >> username >> password;
+			ReadData<MyString>("Enter username:", username);
+			ReadData<MyString>("Enter password:", password);
 			UserType type = UserType::none;
 			int index = IndexByUsername(username, type);
-			if (index == -1) 
+			if (index == -1)
 			{
 				cout << "user with username \"" + username + "\" does ot exist";
 				continue;
@@ -84,19 +138,22 @@ void UberSystem::NotLoggedIn() {
 			size_t passwordHash = HashPassword(password.c_str());
 			if (type == UserType::client)
 			{
-				if (clients[index].GetPassHash() == passwordHash)
-				{
-					//log in 
+				if (clients[index].GetPassHash() == passwordHash) {
+					loggedUser = &clients[index];
+
 				}
+				else cout << "incorrect password";
 			}
-			else if (type == UserType::driver) 
+			else if (type == UserType::driver)
 			{
-				if (drivers[index].GetPassHash() == passwordHash)
-				{
-					//log in 
+				if (drivers[index].GetPassHash() == passwordHash) {
+					loggedUser = &drivers[index];
+
 				}
+				else cout << "incorrect password";
 			}
 		}
+		else if (action == "0") return;
 		else cout << action + " is not a valid action" << endl;
 	}
 }

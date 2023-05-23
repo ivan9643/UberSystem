@@ -30,7 +30,7 @@
     <ClCompile Include="UberSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="String.cpp">
+    <ClCompile Include="MyString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HelperFunctions.cpp">
@@ -65,13 +65,13 @@
     <ClInclude Include="UberSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="String.h">
+    <ClInclude Include="MyString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HelperFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
+    <ClInclude Include="MyVector.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

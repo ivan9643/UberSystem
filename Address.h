@@ -1,6 +1,6 @@
 #pragma once
 #include <fstream>
-#include "String.h"
+#include "MyString.h"
 
 struct Point {
 	int x = 0;
@@ -11,13 +11,13 @@ struct Point {
 };
 
 struct Address {
-	String name;
-	String details;
+	MyString name;
+	MyString details;
 	Point coodinates;
 
 	Address() = default;
-	Address(const Point& coordinates);
-	Address(const String& name, const String& details, const Point& coordinates);
+	Address(const MyString& name, const Point& coordinates);
+	Address(const MyString& name, const MyString& details, const Point& coordinates);
 
 	void SaveToFile(std::ofstream& file) const;
 	void ReadFromFile(std::ifstream& file);

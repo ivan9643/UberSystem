@@ -1,11 +1,12 @@
 #include "Address.h"
 
-Address::Address(const Point& coordinates)
+Address::Address(const MyString& name, const Point& coordinates)
 {
+	this->name = name;
 	this->coodinates = coordinates;
 }
 
-Address::Address(const String& name, const String& details, const Point& coordinates)
+Address::Address(const MyString& name, const MyString& details, const Point& coordinates)
 {
 	this->name = name;
 	this->details = details;

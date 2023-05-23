@@ -7,7 +7,7 @@ class Client : public User {
 
 public:
 	Client() = default;
-	Client(const String& username, const String& password, const String& firstName, const String& lastName, double money);
+	Client(const MyString& username, const MyString& password, const MyString& firstName, const MyString& lastName, double money);
 
 	void AddMoney(double money);
 	//void SaveToFile(std::ofstream& file) const override;

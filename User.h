@@ -1,6 +1,6 @@
 #pragma once
 #include <fstream>
-#include "String.h"
+#include "MyString.h"
 
 enum class Property {
 	username,
@@ -13,30 +13,30 @@ const size_t MAX_LENGTH = 25;
 
 class User {
 protected:
-	String username;
-	String firstName;
-	String lastName;
+	MyString username;
+	MyString firstName;
+	MyString lastName;
 	size_t passHash = 0;
 	double money = 0;
 
-	void SetPassHash(const String& password);
+	void SetPassHash(const MyString& password);
 
-	bool IsUsernameOrPasswordValid(const String& username, Property property) const;
-	bool IsNameValid(const String& name) const;
+	bool IsUsernameOrPasswordValid(const MyString& username, Property property) const;
+	bool IsNameValid(const MyString& name) const;
 
 public:
 	User() = default;
-	User(const String& username, const String& password, const String& firstName, const String& lastName, double money);
+	User(const MyString& username, const MyString& password, const MyString& firstName, const MyString& lastName, double money);
 
-	const String& GetUsername() const;
-	const String& GetFirstName() const;
-	const String& GetLastName() const;
+	const MyString& GetUsername() const;
+	const MyString& GetFirstName() const;
+	const MyString& GetLastName() const;
 	size_t GetPassHash() const;
 	double GetMoney() const;
 
-	void SetUsername(const String& username);
-	void SetFirstName(const String& firstName);
-	void SetLastName(const String& lastName);
+	void SetUsername(const MyString& username);
+	void SetFirstName(const MyString& firstName);
+	void SetLastName(const MyString& lastName);
 	void SetMoney(double money);
 
 	virtual void SaveToFile(std::ofstream& file) const;

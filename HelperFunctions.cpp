@@ -1,4 +1,9 @@
 #include "HelperFunctions.h"
+#include <iostream>
+
+using std::cout;
+using std::cin;
+using std::endl;
 
 //http://www.cse.yorku.ca/~oz/hash.html
 size_t HashPassword(const char* str)
