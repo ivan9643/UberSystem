@@ -115,12 +115,12 @@ void UberSystem::LoggedInDriver()
 }
 
 void UberSystem::PrintLoggedUserData() const {
-	cout << "username: " << loggedUser->GetUsername() << endl;
-	cout << "first name: " << loggedUser->GetFirstName() << endl;
-	cout << "last name: " << loggedUser->GetLastName() << endl;
-	cout << "money: " << loggedUser->GetUsername() << endl;
-	cout << "username: " << loggedUser->GetUsername() << endl;
-	cout << "username: " << loggedUser->GetUsername() << endl;
+	if (loggedUser == nullptr)
+	{
+		MyString errorMessage = "there is no logged user";
+		throw std::runtime_error(errorMessage.c_str());
+	}
+	loggedUser->PrintData();
 }
 
 UberSystem::UberSystem()

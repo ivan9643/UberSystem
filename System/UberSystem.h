@@ -17,6 +17,7 @@ class UberSystem {
 	MyVector<Driver> drivers;
 	MyVector<Order> orders;
 	User* loggedUser;
+	UserType loggedUserType = UserType::none;
 	// check if it is needed to save completed orders
 
 
@@ -35,6 +36,7 @@ class UberSystem {
 	void LoggedInClient();
 	void LoggedInDriver();
 
+	void PrintLoggedUserData() const;
 public:
 	UberSystem();
 
