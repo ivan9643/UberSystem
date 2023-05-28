@@ -1,5 +1,5 @@
 #include "User.h"
-#include "HelperFunctions.h"
+#include "../Helpers/HelperFunctions.h"
 
 void User::SetPassHash(const MyString& password)
 {
@@ -97,6 +97,15 @@ void User::SetLastName(const MyString& lastName)
 void User::SetMoney(double money)
 {
 	if (money >= 0) this->money = money;
+}
+
+void User::PrintData() const
+{
+	cout << "user id: " << userId << endl;
+	cout << "username: " << username << endl;
+	cout << "first name: " << firstName << endl;
+	cout << "last name: " << lastName << endl;
+	cout << "money: " << money << endl;
 }
 
 void User::SaveToFile(std::ofstream& file) const

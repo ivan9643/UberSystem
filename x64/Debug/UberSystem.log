@@ -1,4 +1,4 @@
 ﻿  UberSystem.cpp
-C:\Users\Acer\source\repos\UberSystem\UberSystem\UberSystem.cpp(16,12): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Acer\source\repos\UberSystem\UberSystem\UberSystem.cpp(23,12): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Acer\source\repos\UberSystem\UberSystem\System\UberSystem.cpp(17,12): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Acer\source\repos\UberSystem\UberSystem\System\UberSystem.cpp(24,12): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   UberSystem.vcxproj -> C:\Users\Acer\source\repos\UberSystem\x64\Debug\UberSystem.exe

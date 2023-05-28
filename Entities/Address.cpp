@@ -1,30 +1,34 @@
+#include <iostream>
 #include "Address.h"
+
+using std::cout;
+using std::endl;
 
 Address::Address(const MyString& name, const Point& coordinates)
 {
 	this->name = name;
-	this->coodinates = coordinates;
+	this->coordinates = coordinates;
 }
 
 Address::Address(const MyString& name, const MyString& details, const Point& coordinates)
 {
 	this->name = name;
 	this->details = details;
-	this->coodinates = coordinates;
+	this->coordinates = coordinates;
 }
 
 void Address::SaveToFile(std::ofstream& file) const
 {
 	name.SaveToFile(file);
 	details.SaveToFile(file);
-	coodinates.SaveToFile(file);
+	coordinates.SaveToFile(file);
 }
 
 void Address::ReadFromFile(std::ifstream& file)
 {
 	name.ReadFromFile(file);
 	details.ReadFromFile(file);
-	coodinates.ReadFromFile(file);
+	coordinates.ReadFromFile(file);
 }
 
 void Point::SaveToFile(std::ofstream& file) const

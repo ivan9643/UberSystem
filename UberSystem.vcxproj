@@ -127,27 +127,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Address.cpp" />
-    <ClCompile Include="Client.cpp" />
-    <ClCompile Include="Driver.cpp" />
-    <ClCompile Include="HelperFunctions.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Order.cpp" />
-    <ClCompile Include="MyString.cpp" />
-    <ClCompile Include="UberSystem.cpp" />
-    <ClCompile Include="User.cpp" />
+    <ClCompile Include="Entities\Address.cpp" />
+    <ClCompile Include="Users\Client.cpp" />
+    <ClCompile Include="Users\Driver.cpp" />
+    <ClCompile Include="Helpers\HelperFunctions.cpp" />
+    <ClCompile Include="Main\Main.cpp" />
+    <ClCompile Include="Entities\Order.cpp" />
+    <ClCompile Include="Utilities\MyString.cpp" />
+    <ClCompile Include="System\UberSystem.cpp" />
+    <ClCompile Include="Users\User.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Address.h" />
-    <ClInclude Include="Client.h" />
-    <ClInclude Include="Driver.h" />
-    <ClInclude Include="GlobalConstants.h" />
-    <ClInclude Include="HelperFunctions.h" />
-    <ClInclude Include="Order.h" />
-    <ClInclude Include="MyString.h" />
-    <ClInclude Include="UberSystem.h" />
-    <ClInclude Include="User.h" />
-    <ClInclude Include="MyVector.hpp" />
+    <ClInclude Include="Entities\Address.h" />
+    <ClInclude Include="Helpers\TemplateFunctions.hpp" />
+    <ClInclude Include="Users\Client.h" />
+    <ClInclude Include="Users\Driver.h" />
+    <ClInclude Include="Helpers\HelperFunctions.h" />
+    <ClInclude Include="Entities\Order.h" />
+    <ClInclude Include="Utilities\MyString.h" />
+    <ClInclude Include="System\UberSystem.h" />
+    <ClInclude Include="Users\User.h" />
+    <ClInclude Include="Utilities\MyVector.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

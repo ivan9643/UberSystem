@@ -1,8 +1,8 @@
 #pragma once
-#include "Client.h"
-#include "Driver.h"
-#include "Order.h"
-#include "MyVector.hpp"
+#include "../Users/Client.h"
+#include "../Users/Driver.h"
+#include "../Entities/Order.h"
+#include "../Utilities/MyVector.hpp"
 
 const char DATA_FILE_NAME[] = "data.txt";
 
@@ -21,7 +21,7 @@ class UberSystem {
 
 
 	int IndexByUsername(const MyString& username, UserType& type) const;
-	void CheckIfUsernameInUse(const MyString& username) const;
+	bool UsernameInUse(const MyString& username) const;
 
 	void ReadGeneralUserData(MyString& username, MyString& password, MyString& firstName, MyString& lastName) const;
 	void ReadAdditionalDriverData(MyString& carNumber, MyString& phoneNumber, MyString& addressName, int& x, int& y) const;
@@ -29,6 +29,8 @@ class UberSystem {
 	void AddUser(UserType type, const MyString& username, const MyString& password, const MyString& firstName,
 		const MyString& lastName, const MyString& carNumber = MyString(), const MyString& phoneNumber = MyString(), 
 		const MyString& addressName = MyString(), int x = 0, int y = 0);
+
+	void WelcomeUser() const;
 
 	void LoggedInClient();
 	void LoggedInDriver();
@@ -43,4 +45,6 @@ public:
 	
 	void SaveDataInFile() const;
 	void ReadDataFromFile();
+
+	//~UberSystem(); //save data
 };

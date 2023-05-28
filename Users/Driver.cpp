@@ -1,5 +1,5 @@
 #include "Driver.h"
-#include "HelperFunctions.h"
+#include "../Helpers/HelperFunctions.h"
 
 bool Driver::IsCarNumberValid(const MyString& carNumber)
 {
@@ -49,6 +49,19 @@ void Driver::SaveToFile(std::ofstream& file) const
 	carNumber.SaveToFile(file);
 	phoneNumber.SaveToFile(file);
 	currentLocation.SaveToFile(file);
+}
+
+void Driver::PrintData() const
+{
+	User::PrintData();
+	cout << "car number: " << carNumber << endl;
+	cout << "phone number: " << phoneNumber<< endl;
+	cout << "current location:" << endl;
+	cout << "	name: " << currentLocation.name << endl;
+	cout << "	coordinates: (" << currentLocation.coordinates.x << ", " << currentLocation.coordinates.y << ")" << endl;
+	cout << "rating: " << endl;
+	cout << "	value: " << rating.value << endl;
+	cout << "	votes count: " << rating.votesCount << endl;
 }
 
 void Driver::Rate(double value)

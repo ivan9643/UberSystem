@@ -1,6 +1,7 @@
 #include <fstream>
 #include "UberSystem.h"
-#include "HelperFunctions.h"
+#include "../Helpers/HelperFunctions.h"
+#include "../Helpers/TemplateFunctions.hpp"
 
 using std::cout;
 using std::cin;
@@ -26,46 +27,48 @@ int UberSystem::IndexByUsername(const MyString& username, UserType& type) const
 	return -1;
 }
 
-void UberSystem::CheckIfUsernameInUse(const MyString& username) const {
+bool UberSystem::UsernameInUse(const MyString& username) const {
 	UserType type = UserType::none;
-	if (IndexByUsername(username, type) != -1) {
-		MyString errorMessage = "username \"" + username + "\" already in use";
-		throw std::runtime_error(errorMessage.c_str());
-	}
+	return IndexByUsername(username, type) != -1;
 }
 
 void UberSystem::ReadGeneralUserData(MyString& username, MyString& password, MyString& firstName, MyString& lastName) const
 {
-	ReadData<MyString>("Enter username:", username);
-	ReadData<MyString>("Enter password:", password);
-	ReadData<MyString>("Enter first name:", firstName);
-	ReadData<MyString>("Enter last name:", lastName);
+	ReadData<MyString>("enter username:", username);
+	ReadData<MyString>("enter password:", password);
+	ReadData<MyString>("enter first name:", firstName);
+	ReadData<MyString>("enter last name:", lastName);
 }
 
 void UberSystem::ReadAdditionalDriverData(MyString& carNumber, MyString& phoneNumber, MyString& addressName, int& x, int& y) const
 {
-	ReadData<MyString>("Enter car number:", carNumber);
-	ReadData<MyString>("Enter phone number:", phoneNumber);
-	ReadData<MyString>("Enter address name:", addressName);
-	ReadData<int>("Enter x coordinate:", x);
-	ReadData<int>("Enter y coordinate:", y);
+	ReadData<MyString>("enter car number:", carNumber);
+	ReadData<MyString>("enter phone number:", phoneNumber);
+	ReadMyStringWithGetLine("enter current address name:", addressName);
+	ReadData<int>("enter x coordinate:", x);
+	ReadData<int>("enter y coordinate:", y);
 }
 
 void UberSystem::AddUser(UserType type, const MyString& username, const MyString& password, const MyString& firstName, const MyString& lastName, const MyString& carNumber, const MyString& phoneNumber, const MyString& addressName, int x, int y)
 {
 	try
 	{
-		CheckIfUsernameInUse(username);
+		if (UsernameInUse(username)) {
+			MyString errorMessage = "username \"" + username + "\" already in use";
+			throw std::runtime_error(errorMessage.c_str());
+		}
 		switch (type)
 		{
 		case UserType::client:
 			clients.PushBack(Client(username, password, firstName, lastName, 0));
 			break;
 		case UserType::driver:
-			drivers.PushBack(Driver(username, password, firstName, lastName, 0, carNumber, phoneNumber,
-				Address(addressName, { x,y })));
+			drivers.PushBack(Driver(username, password, firstName, lastName, 0,
+				carNumber, phoneNumber, Address(addressName, { x,y })));
 			break;
 		default:
+			MyString errorMessage = "invalid user type";
+			throw std::runtime_error(errorMessage.c_str());
 			break;
 		}
 	}
@@ -75,13 +78,49 @@ void UberSystem::AddUser(UserType type, const MyString& username, const MyString
 	}
 }
 
+void UberSystem::WelcomeUser() const
+{
+	if (loggedUser == nullptr)
+	{
+		MyString errorMessage = "there is no logged user";
+		throw std::runtime_error(errorMessage.c_str());
+	}
+	cout << "welcome " + loggedUser->GetUsername() << endl;
+}
 
 void UberSystem::LoggedInClient()
 {
+	WelcomeUser();
+
+	MyString menu = "1 - profile info\n2 - \n3 - \n4 - \n5 - \n6 - \n7 - \n0 - logout";
+
+	while (true) {
+		MyString action;
+		cout << menu << endl;
+		cin >> action;
+
+		if (action == "1") PrintLoggedUserData();
+		else if (action == "2")
+		{
+		}
+		else if (action == "0") return;
+		else cout << action + " is not a valid action" << endl;
+	}
 }
 
 void UberSystem::LoggedInDriver()
 {
+	WelcomeUser();
+
+}
+
+void UberSystem::PrintLoggedUserData() const {
+	cout << "username: " << loggedUser->GetUsername() << endl;
+	cout << "first name: " << loggedUser->GetFirstName() << endl;
+	cout << "last name: " << loggedUser->GetLastName() << endl;
+	cout << "money: " << loggedUser->GetUsername() << endl;
+	cout << "username: " << loggedUser->GetUsername() << endl;
+	cout << "username: " << loggedUser->GetUsername() << endl;
 }
 
 UberSystem::UberSystem()
@@ -92,10 +131,6 @@ UberSystem::UberSystem()
 void UberSystem::NotLoggedIn() {
 	MyString menu = "1 - register\n2 - login\n0 - exit";
 	MyString registerMenu = "1 - client\n2 - driver\n0 - back";
-
-	//MyString registration = "Registration:\nfor clients:\nregister client <username> <password> <first_name> <last_name>\n"
-	//	"for drivers:\nregister driver <username> <password> <first_name> <last_name>\n<car_number> <phone_number> <x_coordinate> <y_coordinate>";
-	//MyString login = "Login:\nlogin <username> <password>";
 
 	while (true) {
 		MyString action, username, password;
@@ -126,21 +161,24 @@ void UberSystem::NotLoggedIn() {
 		}
 		else if (action == "2")
 		{
-			ReadData<MyString>("Enter username:", username);
-			ReadData<MyString>("Enter password:", password);
 			UserType type = UserType::none;
+			ReadData<MyString>("enter username:", username);
 			int index = IndexByUsername(username, type);
 			if (index == -1)
 			{
-				cout << "user with username \"" + username + "\" does ot exist";
+				cout << "user with username \"" + username + "\" does ot exist" << endl;
 				continue;
 			}
+			ReadData<MyString>("enter password:", password);
 			size_t passwordHash = HashPassword(password.c_str());
+
 			if (type == UserType::client)
 			{
 				if (clients[index].GetPassHash() == passwordHash) {
 					loggedUser = &clients[index];
-
+					loggedUserType = UserType::client;
+					LoggedInClient();
+					return;
 				}
 				else cout << "incorrect password";
 			}
@@ -148,7 +186,9 @@ void UberSystem::NotLoggedIn() {
 			{
 				if (drivers[index].GetPassHash() == passwordHash) {
 					loggedUser = &drivers[index];
-
+					loggedUserType = UserType::driver;
+					LoggedInDriver();
+					return;
 				}
 				else cout << "incorrect password";
 			}

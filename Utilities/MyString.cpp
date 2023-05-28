@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include "MyString.h"
-#include "HelperFunctions.h"
+#include "../Helpers/HelperFunctions.h"
 
 void MyString::CopyFrom(const MyString& other)
 {
@@ -87,12 +87,12 @@ size_t MyString::GetLength() const
 	return length;
 }
 
-bool MyString::empty() const
+bool MyString::Empty() const
 {
 	return length == 0;
 }
 
-void MyString::clear()
+void MyString::Clear()
 {
 	Free();
 	data = new char[1] {};
@@ -157,6 +157,16 @@ std::istream& operator>>(std::istream& is, MyString& str)
 	str.data = new char[str.length + 1];
 	strcpy_s(str.data, str.length + 1, buff);
 	return is;
+}
+
+void GetLine(std::istream& is, MyString& str)
+{
+	char buff[MAX_BUFFER_SIZE]{};
+	cin.getline(buff, MAX_BUFFER_SIZE).ignore();
+	str.Free();
+	str.length = strlen(buff);
+	str.data = new char[str.length + 1];
+	strcpy_s(str.data, str.length + 1, buff);
 }
 
 std::ostream& operator<<(std::ostream& os, const MyString& str)

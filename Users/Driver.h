@@ -1,8 +1,8 @@
 #pragma once
 #include <fstream>
 #include "User.h"
-#include "Address.h"
-#include "MyVector.hpp"
+#include "../Entities/Address.h"
+#include "../Utilities/MyVector.hpp"
 
 struct Order;
 
@@ -23,6 +23,7 @@ class Driver : public User {
 	Address currentLocation;
 	Rating rating;
 	MyVector<Order*> pendingOrders; //make functions for orders ...
+	size_t completedOrders; //count completed orders
 
 	bool IsCarNumberValid(const MyString& carNumber);
 	bool IsPhoneNumberValid(const MyString& phoneNumber);
@@ -41,6 +42,7 @@ public:
 	void SetPhoneNumber(const MyString& phoneNumber);
 	void SetCurrentLocation(const Address& currentLocation);
 
+	void PrintData() const override;
 	void Rate(double value);
 
 	void SaveToFile(std::ofstream& file) const override;

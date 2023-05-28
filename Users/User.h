@@ -1,6 +1,6 @@
 #pragma once
 #include <fstream>
-#include "MyString.h"
+#include "../Utilities/MyString.h"
 
 enum class Property {
 	username,
@@ -18,6 +18,7 @@ protected:
 	MyString lastName;
 	size_t passHash = 0;
 	double money = 0;
+	size_t userId; //make this
 
 	void SetPassHash(const MyString& password);
 
@@ -38,6 +39,8 @@ public:
 	void SetFirstName(const MyString& firstName);
 	void SetLastName(const MyString& lastName);
 	void SetMoney(double money);
+
+	virtual void PrintData() const;
 
 	virtual void SaveToFile(std::ofstream& file) const;
 	virtual void ReadFromFile(std::ifstream& file);

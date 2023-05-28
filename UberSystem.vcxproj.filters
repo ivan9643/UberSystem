@@ -15,63 +15,63 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Main\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Driver.cpp">
+    <ClCompile Include="Users\Driver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Client.cpp">
+    <ClCompile Include="Users\Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="User.cpp">
+    <ClCompile Include="Users\User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UberSystem.cpp">
+    <ClCompile Include="System\UberSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyString.cpp">
+    <ClCompile Include="Utilities\MyString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HelperFunctions.cpp">
+    <ClCompile Include="Helpers\HelperFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Address.cpp">
+    <ClCompile Include="Entities\Address.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Order.cpp">
+    <ClCompile Include="Entities\Order.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Address.h">
+    <ClInclude Include="Entities\Address.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Client.h">
+    <ClInclude Include="Users\Client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalConstants.h">
+    <ClInclude Include="Users\Driver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Driver.h">
+    <ClInclude Include="Entities\Order.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Order.h">
+    <ClInclude Include="Users\User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="User.h">
+    <ClInclude Include="System\UberSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UberSystem.h">
+    <ClInclude Include="Utilities\MyString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyString.h">
+    <ClInclude Include="Helpers\HelperFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HelperFunctions.h">
+    <ClInclude Include="Utilities\MyVector.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyVector.hpp">
+    <ClInclude Include="Helpers\TemplateFunctions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

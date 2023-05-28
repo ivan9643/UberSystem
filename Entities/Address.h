@@ -1,6 +1,6 @@
 #pragma once
 #include <fstream>
-#include "MyString.h"
+#include "../Utilities/MyString.h"
 
 struct Point {
 	int x = 0;
@@ -13,7 +13,7 @@ struct Point {
 struct Address {
 	MyString name;
 	MyString details;
-	Point coodinates;
+	Point coordinates;
 
 	Address() = default;
 	Address(const MyString& name, const Point& coordinates);

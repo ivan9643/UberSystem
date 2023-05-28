@@ -25,8 +25,8 @@ public:
 	const char operator[](size_t index) const;
 	
 	size_t GetLength() const;
-	bool empty() const;
-	void clear();
+	bool Empty() const;
+	void Clear();
 
 	const char* c_str() const;
 
@@ -36,6 +36,7 @@ public:
 	~MyString();
 
 	friend std::istream& operator>>(std::istream& is, MyString& str);
+	friend void GetLine(std::istream& is, MyString& str);
 	friend std::ostream& operator<<(std::ostream& os, const MyString& str);
 	friend bool operator==(const MyString& lhs, const MyString& rhs);
 	friend bool operator!=(const MyString& lhs, const MyString& rhs);
