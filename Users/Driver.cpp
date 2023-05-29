@@ -57,11 +57,11 @@ void Driver::PrintData() const
 	cout << "car number: " << carNumber << endl;
 	cout << "phone number: " << phoneNumber<< endl;
 	cout << "current location:" << endl;
-	cout << "	name: " << currentLocation.name << endl;
-	cout << "	coordinates: (" << currentLocation.coordinates.x << ", " << currentLocation.coordinates.y << ")" << endl;
+	cout << "   name: " << currentLocation.name << endl;
+	cout << "   coordinates: (" << currentLocation.coordinates.x << ", " << currentLocation.coordinates.y << ")" << endl;
 	cout << "rating: " << endl;
-	cout << "	value: " << rating.value << endl;
-	cout << "	votes count: " << rating.votesCount << endl;
+	cout << "   value: " << rating.value << endl;
+	cout << "   votes count: " << rating.votesCount << endl;
 }
 
 void Driver::Rate(double value)

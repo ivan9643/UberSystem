@@ -159,14 +159,15 @@ std::istream& operator>>(std::istream& is, MyString& str)
 	return is;
 }
 
-void GetLine(std::istream& is, MyString& str)
+std::istream& GetLine(std::istream& is, MyString& str)
 {
 	char buff[MAX_BUFFER_SIZE]{};
-	cin.getline(buff, MAX_BUFFER_SIZE).ignore();
+	cin.getline(buff, MAX_BUFFER_SIZE);
 	str.Free();
 	str.length = strlen(buff);
 	str.data = new char[str.length + 1];
 	strcpy_s(str.data, str.length + 1, buff);
+	return is;
 }
 
 std::ostream& operator<<(std::ostream& os, const MyString& str)

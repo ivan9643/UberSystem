@@ -1,6 +1,7 @@
 #pragma once
 #include "../Users/Client.h"
 #include "Address.h"
+#include "../SmartPointers/SharedPtr.hpp"
 
 class Driver;
 
@@ -10,8 +11,8 @@ struct Order {
 	Address destination;
 	size_t passengersCount = 0;
 	size_t id = GetNextId(); //make it work when reading orders from file
-	Client* client = nullptr;
-	Driver* driver = nullptr;
+	SharedPtr<Client> client = nullptr;
+	SharedPtr<Driver> driver = nullptr;
 	bool isAccepted = false;
 	
 	static size_t GetNextId();

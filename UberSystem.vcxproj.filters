@@ -74,5 +74,14 @@
     <ClInclude Include="Helpers\TemplateFunctions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SmartPointers\SharedPtr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartPointers\WeakPtr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartPointers\UniquePtr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

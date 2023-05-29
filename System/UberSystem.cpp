@@ -80,15 +80,45 @@ void UberSystem::AddUser(UserType type, const MyString& username, const MyString
 
 void UberSystem::WelcomeUser() const
 {
-	if (loggedUser == nullptr)
-	{
-		MyString errorMessage = "there is no logged user";
-		throw std::runtime_error(errorMessage.c_str());
-	}
-	cout << "welcome " + loggedUser->GetUsername() << endl;
+	CheckForLoggedUser();
+	if (loggedUserType == UserType::client)
+		cout << "welcome " + loggedClient ->GetUsername() << endl;
+	else if (loggedUserType == UserType::driver) 
+		cout << "welcome " + loggedDriver->GetUsername() << endl;
 }
 
 void UberSystem::LoggedInClient()
+{
+	WelcomeUser();
+
+	MyString menu = "1 - profile info\n2 - add money\n3 - \n4 - \n5 - \n6 - \n7 - \n0 - logout";
+
+	while (true) {
+		MyString action;
+		cout << menu << endl;
+		cin >> action;
+
+		if (action == "1") PrintLoggedUserData();
+		else if (action == "2")
+		{
+			double money;
+			ReadData<double>("enter amount:", money);
+			try
+			{
+				loggedClient->AddMoney(money);
+			}
+			catch (const std::exception& e)
+			{
+				cout << e.what() << endl << endl;
+			}
+
+		}
+		else if (action == "0") return;
+		else cout << action + " is not a valid action" << endl;
+	}
+}
+
+void UberSystem::LoggedInDriver()
 {
 	WelcomeUser();
 
@@ -108,19 +138,29 @@ void UberSystem::LoggedInClient()
 	}
 }
 
-void UberSystem::LoggedInDriver()
+void UberSystem::CheckForLoggedUser() const
 {
-	WelcomeUser();
-
+	MyString errorMessage = "there is no logged user";
+	switch (loggedUserType)
+	{
+	case UserType::client:
+		if (loggedClient.isNullPtr())
+			throw std::runtime_error(errorMessage.c_str());
+		break;
+	case UserType::driver:
+		if (loggedDriver.isNullPtr())
+			throw std::runtime_error(errorMessage.c_str());
+		break;
+	default:
+		throw std::runtime_error(errorMessage.c_str());
+		break;
+	}
 }
 
 void UberSystem::PrintLoggedUserData() const {
-	if (loggedUser == nullptr)
-	{
-		MyString errorMessage = "there is no logged user";
-		throw std::runtime_error(errorMessage.c_str());
-	}
-	loggedUser->PrintData();
+	CheckForLoggedUser();
+	if (loggedUserType == UserType::client) loggedClient->PrintData();
+	else if (loggedUserType == UserType::driver) loggedClient->PrintData();
 }
 
 UberSystem::UberSystem()
@@ -175,7 +215,7 @@ void UberSystem::NotLoggedIn() {
 			if (type == UserType::client)
 			{
 				if (clients[index].GetPassHash() == passwordHash) {
-					loggedUser = &clients[index];
+					loggedClient = &clients[index];
 					loggedUserType = UserType::client;
 					LoggedInClient();
 					return;
@@ -185,7 +225,7 @@ void UberSystem::NotLoggedIn() {
 			else if (type == UserType::driver)
 			{
 				if (drivers[index].GetPassHash() == passwordHash) {
-					loggedUser = &drivers[index];
+					loggedDriver = &drivers[index];
 					loggedUserType = UserType::driver;
 					LoggedInDriver();
 					return;

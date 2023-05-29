@@ -16,8 +16,9 @@ class UberSystem {
 	MyVector<Client> clients;
 	MyVector<Driver> drivers;
 	MyVector<Order> orders;
-	User* loggedUser;
-	UserType loggedUserType = UserType::none;
+	SharedPtr<Client> loggedClient;
+	SharedPtr<Driver> loggedDriver;
+	UserType loggedUserType = UserType::none; // maybe isnt needed
 	// check if it is needed to save completed orders
 
 
@@ -30,6 +31,8 @@ class UberSystem {
 	void AddUser(UserType type, const MyString& username, const MyString& password, const MyString& firstName,
 		const MyString& lastName, const MyString& carNumber = MyString(), const MyString& phoneNumber = MyString(), 
 		const MyString& addressName = MyString(), int x = 0, int y = 0);
+
+	void CheckForLoggedUser() const;
 
 	void WelcomeUser() const;
 

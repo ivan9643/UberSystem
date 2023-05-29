@@ -3,6 +3,7 @@
 #include "User.h"
 #include "../Entities/Address.h"
 #include "../Utilities/MyVector.hpp"
+#include "../SmartPointers/SharedPtr.hpp"
 
 struct Order;
 
@@ -22,7 +23,7 @@ class Driver : public User {
 	MyString phoneNumber;
 	Address currentLocation;
 	Rating rating;
-	MyVector<Order*> pendingOrders; //make functions for orders ...
+	MyVector<SharedPtr<Order>*> pendingOrders; //make functions for orders ...
 	size_t completedOrders; //count completed orders
 
 	bool IsCarNumberValid(const MyString& carNumber);
