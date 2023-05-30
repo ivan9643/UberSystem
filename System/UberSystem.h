@@ -33,13 +33,12 @@ class UberSystem {
 		const MyString& addressName = MyString(), int x = 0, int y = 0);
 
 	void CheckForLoggedUser() const;
-
-	void WelcomeUser() const;
+	void WelcomeUser(const MyString& username) const;
 
 	void LoggedInClient();
-	void LoggedInDriver();
+	void ClientAddMoney();
 
-	void PrintLoggedUserData() const;
+	void LoggedInDriver();
 public:
 	UberSystem();
 

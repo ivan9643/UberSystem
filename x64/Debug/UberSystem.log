@@ -1,8 +1,54 @@
-﻿  Driver.cpp
+﻿  Authentication.cpp
+  ClientFunctions.cpp
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(9,3): error C2065: 'cout': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(9,3): error C3861: 'cout': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(9,21): error C3861: 'endl': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(10,3): error C3861: 'cin': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(11,7): error C3861: 'cin': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(12,4): error C3861: 'cin': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(13,4): error C3861: 'cin': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(14,4): error C2065: 'cout': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(14,4): error C3861: 'cout': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(14,31): error C3861: 'endl': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(9,21): error C2065: 'endl': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(10,3): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(11,7): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(12,4): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(13,4): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(14,31): error C2065: 'endl': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(22,2): error C2065: 'cout': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(22,20): error C2065: 'endl': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(23,2): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(24,10): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\System\ClientFunctions.cpp(10,2): error C2660: 'UberSystem::WelcomeUser': function does not take 0 arguments
+C:\Users\Acer\source\repos\UberSystem\UberSystem\System\UberSystem.h(36,7): message : see declaration of 'UberSystem::WelcomeUser'
+C:\Users\Acer\source\repos\UberSystem\UberSystem\System\ClientFunctions.cpp(10,2): message : while trying to match the argument list '()'
+  DriverFunctions.cpp
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(9,3): error C2065: 'cout': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(9,3): error C3861: 'cout': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(9,21): error C3861: 'endl': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(10,3): error C3861: 'cin': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(11,7): error C3861: 'cin': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(12,4): error C3861: 'cin': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(13,4): error C3861: 'cin': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(14,4): error C2065: 'cout': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(14,4): error C3861: 'cout': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(14,31): error C3861: 'endl': identifier not found
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(9,21): error C2065: 'endl': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(10,3): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(11,7): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(12,4): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(13,4): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(14,31): error C2065: 'endl': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(22,2): error C2065: 'cout': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(22,20): error C2065: 'endl': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(23,2): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\Helpers\TemplateFunctions.hpp(24,10): error C2065: 'cin': undeclared identifier
+C:\Users\Acer\source\repos\UberSystem\UberSystem\System\DriverFunctions.cpp(10,2): error C2660: 'UberSystem::WelcomeUser': function does not take 0 arguments
+C:\Users\Acer\source\repos\UberSystem\UberSystem\System\UberSystem.h(36,7): message : see declaration of 'UberSystem::WelcomeUser'
+C:\Users\Acer\source\repos\UberSystem\UberSystem\System\DriverFunctions.cpp(10,2): message : while trying to match the argument list '()'
   Main.cpp
-  Order.cpp
   UberSystem.cpp
 C:\Users\Acer\source\repos\UberSystem\UberSystem\System\UberSystem.cpp(17,12): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Acer\source\repos\UberSystem\UberSystem\System\UberSystem.cpp(24,12): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
-  UberSystem.vcxproj -> C:\Users\Acer\source\repos\UberSystem\x64\Debug\UberSystem.exe
