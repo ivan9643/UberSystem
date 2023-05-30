@@ -19,6 +19,7 @@ protected:
 	size_t passHash = 0;
 	double money = 0;
 	size_t userId; //make this
+	size_t completedOrders; //count completed orders
 
 	void SetPassHash(const MyString& password);
 

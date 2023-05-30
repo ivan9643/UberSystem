@@ -51,6 +51,9 @@
     <ClCompile Include="System\Authentication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="System\Users.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entities\Address.h">

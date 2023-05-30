@@ -12,3 +12,4 @@ bool IsDigit(char ch);
 bool IsUpper(char ch);
 bool IsLower(char ch);
 size_t GetDigitsCount(size_t n);
+void ReadMyStringWithGetLine(const MyString& prompt, MyString& string);

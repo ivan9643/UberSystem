@@ -22,9 +22,8 @@ class Driver : public User {
 	MyString carNumber;
 	MyString phoneNumber;
 	Address currentLocation;
-	Rating rating;
+	Rating rating; //getter for rating
 	MyVector<SharedPtr<Order>*> pendingOrders; //make functions for orders ...
-	size_t completedOrders; //count completed orders
 
 	bool IsCarNumberValid(const MyString& carNumber);
 	bool IsPhoneNumberValid(const MyString& phoneNumber);

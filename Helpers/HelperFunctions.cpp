@@ -1,5 +1,4 @@
 #include "HelperFunctions.h"
-#include <iostream>
 
 using std::cout;
 using std::cin;
@@ -41,4 +40,11 @@ size_t GetDigitsCount(size_t n)
 	size_t count = 1;
 	while ((n /= 10) != 0) count++;
 	return count;
+}
+
+void ReadMyStringWithGetLine(const MyString& prompt, MyString& string)
+{
+	cout << prompt << endl;
+	cin.ignore();
+	GetLine(cin, string);
 }

@@ -9,7 +9,7 @@ using std::endl;
 void UberSystem::NotLoggedIn() {
 	MyString menu = "1 - register\n2 - login\n0 - exit";
 	MyString action;
-	
+
 	while (true) {
 		cout << menu << endl;
 		cin >> action;
@@ -81,6 +81,12 @@ void UberSystem::Login()
 	}
 }
 
+void UberSystem::Logout() {
+	if (loggedUserType == UserType::client) loggedClient = nullptr;
+	else if (loggedUserType == UserType::driver) loggedDriver = nullptr;
+	loggedUserType = UserType::none;
+}
+
 void UberSystem::CheckForLoggedUser() const
 {
 	MyString errorMessage = "there is no logged user";
@@ -98,9 +104,4 @@ void UberSystem::CheckForLoggedUser() const
 		throw std::runtime_error(errorMessage.c_str());
 		break;
 	}
-}
-
-void UberSystem::WelcomeUser(const MyString& username) const
-{
-	cout << "welcome " << username << endl;
 }

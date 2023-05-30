@@ -24,21 +24,23 @@ class UberSystem {
 
 	int IndexByUsername(const MyString& username, UserType& type) const;
 	bool UsernameInUse(const MyString& username) const;
-
 	void ReadGeneralUserData(MyString& username, MyString& password, MyString& firstName, MyString& lastName) const;
 	void ReadAdditionalDriverData(MyString& carNumber, MyString& phoneNumber, MyString& addressName, int& x, int& y) const;
-
+	void ReadAddressData(MyString& addressName, int& x, int& y) const;
 	void AddUser(UserType type, const MyString& username, const MyString& password, const MyString& firstName,
 		const MyString& lastName, const MyString& carNumber = MyString(), const MyString& phoneNumber = MyString(), 
 		const MyString& addressName = MyString(), int x = 0, int y = 0);
 
+	void Register();
+	void Login();
+	void Logout();
 	void CheckForLoggedUser() const;
-	void WelcomeUser(const MyString& username) const;
 
 	void LoggedInClient();
 	void ClientAddMoney();
 
 	void LoggedInDriver();
+	void DriverChangeAddress();
 public:
 	UberSystem();
 

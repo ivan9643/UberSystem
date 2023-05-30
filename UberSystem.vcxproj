@@ -131,6 +131,7 @@
     <ClCompile Include="System\Authentication.cpp" />
     <ClCompile Include="System\ClientFunctions.cpp" />
     <ClCompile Include="System\DriverFunctions.cpp" />
+    <ClCompile Include="System\Users.cpp" />
     <ClCompile Include="Users\Client.cpp" />
     <ClCompile Include="Users\Driver.cpp" />
     <ClCompile Include="Helpers\HelperFunctions.cpp" />

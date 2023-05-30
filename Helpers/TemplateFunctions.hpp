@@ -2,6 +2,10 @@
 #include "../Utilities/MyString.h"
 #include <limits> //this too
 
+using std::cout;
+using std::cin;
+using std::endl;
+
 template<class T>
 void ReadData(const MyString& prompt, T& data)
 {
@@ -15,11 +19,4 @@ void ReadData(const MyString& prompt, T& data)
 		}
 		else break;
 	}
-}
-
-void ReadMyStringWithGetLine(const MyString& prompt, MyString& string)
-{
-	cout << prompt << endl;
-	cin.ignore();
-	GetLine(cin, string);
 }

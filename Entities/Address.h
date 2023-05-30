@@ -11,7 +11,7 @@ struct Point {
 };
 
 struct Address {
-	MyString name;
+	MyString name; //validate name
 	MyString details;
 	Point coordinates;
 
