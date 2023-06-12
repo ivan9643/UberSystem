@@ -44,7 +44,12 @@ size_t GetDigitsCount(size_t n)
 
 void ReadMyStringWithGetLine(const MyString& prompt, MyString& string)
 {
-	cout << prompt << endl;
+	cout << prompt;
 	cin.ignore();
 	GetLine(cin, string);
+}
+
+double GetDistance(const Point& a, const Point& b)
+{
+	return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }

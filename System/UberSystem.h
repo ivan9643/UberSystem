@@ -13,34 +13,43 @@ enum class UserType {
 };
 
 class UberSystem {
-	MyVector<Client> clients;
-	MyVector<Driver> drivers;
-	MyVector<Order> orders;
+	MyVector<SharedPtr<Client>> clients;
+	MyVector<SharedPtr<Driver>> drivers;
+	MyVector<SharedPtr<Order>> completedOrders;
+	MyVector<SharedPtr<Order>> pendingOrders;
 	SharedPtr<Client> loggedClient;
 	SharedPtr<Driver> loggedDriver;
-	UserType loggedUserType = UserType::none; // maybe isnt needed
-	// check if it is needed to save completed orders
-
+	UserType loggedUserType = UserType::none;
 
 	int IndexByUsername(const MyString& username, UserType& type) const;
 	bool UsernameInUse(const MyString& username) const;
+
 	void ReadGeneralUserData(MyString& username, MyString& password, MyString& firstName, MyString& lastName) const;
-	void ReadAdditionalDriverData(MyString& carNumber, MyString& phoneNumber, MyString& addressName, int& x, int& y) const;
-	void ReadAddressData(MyString& addressName, int& x, int& y) const;
+	void ReadAdditionalDriverData(MyString& carNumber, size_t& carPassengersCountCapacity, MyString& phoneNumber,
+		MyString& addressName, int& x, int& y) const;
+	void ReadAddressData(const MyString& prompt, MyString& addressName, int& x, int& y) const;
+	void ReadAddressDataWithDetails(const MyString& prompt, MyString& addressName, int& x, int& y, MyString& details) const;
 	void AddUser(UserType type, const MyString& username, const MyString& password, const MyString& firstName,
-		const MyString& lastName, const MyString& carNumber = MyString(), const MyString& phoneNumber = MyString(), 
-		const MyString& addressName = MyString(), int x = 0, int y = 0);
+		const MyString& lastName, const MyString& carNumber = MyString(), size_t carPassengersCountCapacity = 0, 
+		const MyString& phoneNumber = MyString(), const MyString& addressName = MyString(), int x = 0, int y = 0);
 
 	void Register();
 	void Login();
 	void Logout();
 	void CheckForLoggedUser() const;
+	void CheckForLoggedClient() const;
+	void CheckForLoggedDriver() const;
 
 	void LoggedInClient();
 	void ClientAddMoney();
+	void ClientOrder();
+
+	void MakeOrder(const Address& clientCurrentLocation, const Address& destination, size_t passengersCount);
+	void SetNearestDriver(SharedPtr<Order>& order);
 
 	void LoggedInDriver();
-	void DriverChangeAddress();
+	void DriverChangeCurrentLocation();
+	void DriverCheckPendingOrders();
 public:
 	UberSystem();
 
@@ -49,6 +58,7 @@ public:
 
 	void NotLoggedIn();
 	
+	//check if these work after changing the vectors to store pointers
 	void SaveDataInFile() const;
 	void ReadDataFromFile();
 

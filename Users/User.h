@@ -30,6 +30,7 @@ public:
 	User() = default;
 	User(const MyString& username, const MyString& password, const MyString& firstName, const MyString& lastName, double money);
 
+	size_t GetUserId() const;
 	const MyString& GetUsername() const;
 	const MyString& GetFirstName() const;
 	const MyString& GetLastName() const;

@@ -4,6 +4,10 @@
 #include "MyString.h"
 #include "../Helpers/HelperFunctions.h"
 
+using std::cout;
+using std::cin;
+using std::endl;
+
 void MyString::CopyFrom(const MyString& other)
 {
 	length = other.length;

@@ -7,9 +7,10 @@ using std::endl;
 
 void UberSystem::LoggedInDriver()
 {
+	CheckForLoggedDriver();
 	cout << "welcome " << loggedDriver->GetUsername() << endl;
 
-	MyString menu = "1 - profile info\n2 - change address\n3 - \n4 - \n5 - \n6 - \n7 - \n0 - logout";
+	MyString menu = "1 - profile info\n2 - change current location\n3 - check pending orders\n4 - accept order\n5 - decline order\n6 - \n7 - \n0 - logout";
 
 	MyString action;
 	while (action != "0") {
@@ -17,16 +18,33 @@ void UberSystem::LoggedInDriver()
 		cin >> action;
 
 		if (action == "1") loggedDriver->PrintData();
-		else if (action == "2") DriverChangeAddress();
+		else if (action == "2") DriverChangeCurrentLocation();
+		else if (action == "3") DriverCheckPendingOrders();
+		else if (action == "4");
+		else if (action == "5");
 		else if (action == "0") Logout();
 		else cout << action + " is not a valid action" << endl;
 	}
 }
 
-void UberSystem::DriverChangeAddress()
+void UberSystem::DriverChangeCurrentLocation()
 {
-	MyString addressName;
+	CheckForLoggedDriver();
+	MyString currentLocationName;
 	int x, y;
-	ReadAddressData(addressName, x, y);
-	loggedDriver->SetCurrentLocation(Address(addressName, { x, y }));
+	try
+	{
+		ReadAddressData("new current location:", currentLocationName, x, y);
+		loggedDriver->SetCurrentLocation(Address(currentLocationName, { x, y }));
+	}
+	catch (const std::exception& e)
+	{
+		cout << e.what() << endl;
+	}
+}
+
+void UberSystem::DriverCheckPendingOrders()
+{
+	CheckForLoggedDriver();
+	MyVector<SharedPtr<Order>> pendingOrders = loggedDriver->GetPendingOrders();
 }

@@ -1,6 +1,10 @@
 #include "Driver.h"
 #include "../Helpers/HelperFunctions.h"
 
+using std::cout;
+using std::cin;
+using std::endl;
+
 bool Driver::IsCarNumberValid(const MyString& carNumber)
 {
 	MyString errorMessage = "car number length must be in [" + MyString(MIN_CAR_NUMBER_LENGTH) + ", " +
@@ -43,6 +47,16 @@ const Address& Driver::GetCurrentLocation() const
 	return currentLocation;
 }
 
+size_t Driver::GetCarPassengersCountCapacity() const
+{
+	return carPassengersCountCapacity;
+}
+
+const MyVector<SharedPtr<Order>>& Driver::GetPendingOrders() const
+{
+	return pendingOrders;
+}
+
 void Driver::SaveToFile(std::ofstream& file) const
 {
 	User::SaveToFile(file);
@@ -55,10 +69,11 @@ void Driver::PrintData() const
 {
 	User::PrintData();
 	cout << "car number: " << carNumber << endl;
+	cout << "car passengers count capacity: " << carPassengersCountCapacity << endl;
 	cout << "phone number: " << phoneNumber<< endl;
 	cout << "current location:" << endl;
-	cout << "   name: " << currentLocation.name << endl;
-	cout << "   coordinates: (" << currentLocation.coordinates.x << ", " << currentLocation.coordinates.y << ")" << endl;
+	cout << "   name: " << currentLocation.GetName() << endl;
+	cout << "   coordinates: (" << currentLocation.GetCoordinates().x << ", " << currentLocation.GetCoordinates().y << ")" << endl;
 	cout << "rating: " << endl;
 	cout << "   value: " << rating.value << endl;
 	cout << "   votes count: " << rating.votesCount << endl;
@@ -93,10 +108,20 @@ void Driver::SetCurrentLocation(const Address& currentLocation)
 	this->currentLocation = currentLocation;
 }
 
+void Driver::SetCarPassengersCountCapacity(size_t carPassengersCountCapacity)
+{
+	this->carPassengersCountCapacity = carPassengersCountCapacity;
+}
+
+void Driver::AddOrder(SharedPtr<Order>& order)
+{
+	pendingOrders.PushBack(order);
+}
+
 Driver::Driver(const MyString& username, const MyString& password, const MyString& firstName,
-	const MyString& lastName, double money, const MyString& carNumber, const MyString& phoneNumber,
+	const MyString& lastName, double money, const MyString& carNumber, size_t carPassengersCountCapacity, const MyString& phoneNumber,
 	const Address& currentLocation)
-	:User(username, password, firstName, lastName, money)
+	:User(username, password, firstName, lastName, money), carPassengersCountCapacity(carPassengersCountCapacity)
 {
 	SetCarNumber(carNumber);
 	SetPhoneNumber(phoneNumber);

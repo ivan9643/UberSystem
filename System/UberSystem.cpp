@@ -18,15 +18,19 @@ void UberSystem::SaveDataInFile() const
 
 	file.write((const char*)&clients.capacity, sizeof(clients.capacity));
 	file.write((const char*)&clients.currentSize, sizeof(clients.currentSize));
-	for (size_t i = 0; i < clients.currentSize; i++) clients[i].SaveToFile(file);
+	for (size_t i = 0; i < clients.currentSize; i++) clients[i]->SaveToFile(file);
 
 	file.write((const char*)&drivers.capacity, sizeof(drivers.capacity));
 	file.write((const char*)&drivers.currentSize, sizeof(drivers.currentSize));
-	for (size_t i = 0; i < drivers.currentSize; i++) drivers[i].SaveToFile(file);
+	for (size_t i = 0; i < drivers.currentSize; i++) drivers[i]->SaveToFile(file);
 
-	file.write((const char*)&orders.capacity, sizeof(orders.capacity));
-	file.write((const char*)&orders.currentSize, sizeof(orders.currentSize));
-	for (size_t i = 0; i < orders.currentSize; i++) orders[i].SaveToFile(file);
+	file.write((const char*)&completedOrders.capacity, sizeof(completedOrders.capacity));
+	file.write((const char*)&completedOrders.currentSize, sizeof(completedOrders.currentSize));
+	for (size_t i = 0; i < completedOrders.currentSize; i++) completedOrders[i]->SaveToFile(file);
+
+	file.write((const char*)&pendingOrders.capacity, sizeof(pendingOrders.capacity));
+	file.write((const char*)&pendingOrders.currentSize, sizeof(pendingOrders.currentSize));
+	for (size_t i = 0; i < pendingOrders.currentSize; i++) pendingOrders[i]->SaveToFile(file);
 }
 
 void UberSystem::ReadDataFromFile()
@@ -35,13 +39,17 @@ void UberSystem::ReadDataFromFile()
 
 	file.read((char*)&clients.capacity, sizeof(clients.capacity));
 	file.read((char*)&clients.currentSize, sizeof(clients.currentSize));
-	for (size_t i = 0; i < clients.currentSize; i++) clients[i].ReadFromFile(file);
+	for (size_t i = 0; i < clients.currentSize; i++) clients[i]->ReadFromFile(file);
 
 	file.read((char*)&drivers.capacity, sizeof(drivers.capacity));
 	file.read((char*)&drivers.currentSize, sizeof(drivers.currentSize));
-	for (size_t i = 0; i < drivers.currentSize; i++) drivers[i].ReadFromFile(file);
+	for (size_t i = 0; i < drivers.currentSize; i++) drivers[i]->ReadFromFile(file);
 
-	file.read((char*)&orders.capacity, sizeof(orders.capacity));
-	file.read((char*)&orders.currentSize, sizeof(orders.currentSize));
-	for (size_t i = 0; i < orders.currentSize; i++) orders[i].ReadFromFile(file);
+	file.read((char*)&completedOrders.capacity, sizeof(completedOrders.capacity));
+	file.read((char*)&completedOrders.currentSize, sizeof(completedOrders.currentSize));
+	for (size_t i = 0; i < completedOrders.currentSize; i++) completedOrders[i]->ReadFromFile(file);
+
+	file.read((char*)&pendingOrders.capacity, sizeof(pendingOrders.capacity));
+	file.read((char*)&pendingOrders.currentSize, sizeof(pendingOrders.currentSize));
+	for (size_t i = 0; i < pendingOrders.currentSize; i++) pendingOrders[i]->ReadFromFile(file);
 }

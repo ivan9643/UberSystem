@@ -1,6 +1,10 @@
 #include "User.h"
 #include "../Helpers/HelperFunctions.h"
 
+using std::cout;
+using std::cin;
+using std::endl;
+
 void User::SetPassHash(const MyString& password)
 {
 	if (IsUsernameOrPasswordValid(password, Property::password)) passHash = HashPassword(password.c_str());;

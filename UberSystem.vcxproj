@@ -146,7 +146,6 @@
     <ClInclude Include="Helpers\TemplateFunctions.hpp" />
     <ClInclude Include="SmartPointers\SharedPtr.hpp" />
     <ClInclude Include="SmartPointers\UniquePtr.hpp" />
-    <ClInclude Include="SmartPointers\WeakPtr.hpp" />
     <ClInclude Include="Users\Client.h" />
     <ClInclude Include="Users\Driver.h" />
     <ClInclude Include="Helpers\HelperFunctions.h" />

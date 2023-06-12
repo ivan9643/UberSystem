@@ -37,9 +37,10 @@ void UberSystem::Register()
 	{
 		MyString carNumber, phoneNumber, addressName;
 		int x, y;
+		size_t carPassengersCountCapacity;
 		ReadGeneralUserData(username, password, firstName, lastName);
-		ReadAdditionalDriverData(carNumber, phoneNumber, addressName, x, y);
-		AddUser(UserType::driver, username, password, firstName, lastName, carNumber, phoneNumber, addressName, x, y);
+		ReadAdditionalDriverData(carNumber, carPassengersCountCapacity, phoneNumber, addressName, x, y);
+		AddUser(UserType::driver, username, password, firstName, lastName, carNumber, carPassengersCountCapacity, phoneNumber, addressName, x, y);
 	}
 	else if (action == "0") return;
 	else cout << action + " is not a valid action" << endl;
@@ -49,20 +50,20 @@ void UberSystem::Login()
 {
 	MyString username, password;
 	UserType type = UserType::none;
-	ReadData<MyString>("enter username:", username);
+	ReadData<MyString>("enter username: ", username);
 	int index = IndexByUsername(username, type);
 	if (index == -1)
 	{
 		cout << "user with username \"" + username + "\" does ot exist" << endl;
 		return;
 	}
-	ReadData<MyString>("enter password:", password);
+	ReadData<MyString>("enter password: ", password);
 	size_t passwordHash = HashPassword(password.c_str());
 
 	if (type == UserType::client)
 	{
-		if (clients[index].GetPassHash() == passwordHash) {
-			loggedClient = &clients[index];
+		if (clients[index]->GetPassHash() == passwordHash) {
+			loggedClient = clients[index];
 			loggedUserType = UserType::client;
 			LoggedInClient();
 			return;
@@ -71,8 +72,8 @@ void UberSystem::Login()
 	}
 	else if (type == UserType::driver)
 	{
-		if (drivers[index].GetPassHash() == passwordHash) {
-			loggedDriver = &drivers[index];
+		if (drivers[index]->GetPassHash() == passwordHash) {
+			loggedDriver = drivers[index];
 			loggedUserType = UserType::driver;
 			LoggedInDriver();
 			return;
@@ -83,21 +84,46 @@ void UberSystem::Login()
 
 void UberSystem::Logout() {
 	if (loggedUserType == UserType::client) loggedClient = nullptr;
-	else if (loggedUserType == UserType::driver) loggedDriver = nullptr;
+	else if (loggedUserType == UserType::driver) loggedDriver = nullptr; //fix error
 	loggedUserType = UserType::none;
 }
 
 void UberSystem::CheckForLoggedUser() const
 {
 	MyString errorMessage = "there is no logged user";
+	try
+	{
+		CheckForLoggedClient();
+		CheckForLoggedDriver();
+	}
+	catch (const std::exception&)
+	{
+		throw std::runtime_error(errorMessage.c_str());
+	}
+}
+
+void UberSystem::CheckForLoggedClient() const
+{
+	MyString errorMessage = "there is no logged client";
 	switch (loggedUserType)
 	{
 	case UserType::client:
-		if (loggedClient.isNullPtr())
+		if (loggedClient.IsNullPtr())
 			throw std::runtime_error(errorMessage.c_str());
 		break;
+	default:
+		throw std::runtime_error(errorMessage.c_str());
+		break;
+	}
+}
+
+void UberSystem::CheckForLoggedDriver() const
+{
+	MyString errorMessage = "there is no logged driver";
+	switch (loggedUserType)
+	{
 	case UserType::driver:
-		if (loggedDriver.isNullPtr())
+		if (loggedDriver.IsNullPtr())
 			throw std::runtime_error(errorMessage.c_str());
 		break;
 	default:

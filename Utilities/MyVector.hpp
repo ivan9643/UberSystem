@@ -10,7 +10,7 @@ class MyVector {
 
 	void Resize(size_t newCapacity);
 	void MoveFrom(MyVector&&) noexcept;
-	void CopyFrom(const MyVector<T>& other); // if current has enough space dont allocate new memory !!
+	void CopyFrom(const MyVector<T>& other);
 	void Free();
 public:
 	MyVector();

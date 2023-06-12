@@ -1,192 +1,173 @@
 #pragma once
-#include <iostream>
-#include <stdexcept>
 
-template <typename T>
-class SharedPtr
-{
-	template <typename T> friend class WeakPtr;
+template<class T>
+class SharedPtr {
+private:
 
-	struct Counter
-	{
-		unsigned useCount = 0;
-		unsigned weakCount = 0;
+	T* data = nullptr;
+	size_t* count;
 
-		void removeSharedPtr()
-		{
-			useCount--;
-			if (useCount == 0)
-				weakCount--;
-		}
-		void removeWeakPtr()
-		{
-			weakCount--;
-		}
-
-		void addSharedPtr()
-		{
-			useCount++;
-			if (useCount == 1)
-				weakCount++;
-		}
-
-		void addWeakPtr()
-		{
-			weakCount++;
-		}
-
-	};
-
-	T* data;
-	Counter* counter;
-
-	void free();
-	void copyFrom(const SharedPtr<T>& other);
-	void moveFrom(SharedPtr<T>&& other) noexcept;
-
+	void Free();
+	void CopyFrom(const SharedPtr<T>&);
+	void MoveFrom(SharedPtr<T>&&);
 public:
 	SharedPtr();
-	SharedPtr(T* data);
+	SharedPtr(T*);
 
-	SharedPtr(const SharedPtr<T>& other);
-	SharedPtr& operator=(const SharedPtr<T>& other);
+	void Reset();
 
-	SharedPtr(SharedPtr<T>&& other) noexcept;
-	SharedPtr& operator=(SharedPtr<T>&& other) noexcept;
+	SharedPtr(const SharedPtr<T>&);
+	SharedPtr(SharedPtr<T>&&);
 
 	const T& operator*() const;
 	T& operator*();
+
 	const T* operator->() const;
 	T* operator->();
 
-	bool isNullPtr() const;
+	bool operator==(const SharedPtr& other);
+	bool operator!=(const SharedPtr& other);
+
+	bool Unique() const;
+	bool IsNullPtr() const;
+
+	bool operator!() const;
+
+
+	size_t RefCount() const;
+
+	SharedPtr<T>& operator=(const SharedPtr<T>&);
+	SharedPtr<T>& operator=(SharedPtr<T>&&) noexcept;
 
 	~SharedPtr();
 };
 
-template <typename T>
-void SharedPtr<T>::free()
-{
-	if (data == nullptr && counter == nullptr)
-		return;
-
-	counter->removeSharedPtr();
-
-	if (counter->useCount == 0)
+template<class T>
+void SharedPtr<T>::Free() {
+	if (count && --(*count) == 0) {
 		delete data;
-
-	if (counter->weakCount == 0)
-		delete counter;
-}
-
-template <typename T>
-void SharedPtr<T>::copyFrom(const SharedPtr<T>& other)
-{
-	data = other.data;
-	counter = other.counter;
-	if (counter)
-		counter->addSharedPtr();
-}
-
-template <typename T>
-SharedPtr<T>::SharedPtr()
-{
-	data = nullptr;
-	counter = nullptr;
-}
-
-template <typename T>
-SharedPtr<T>::SharedPtr(T* data)
-{
-	this->data = data;
-	if (this->data)
-	{
-		counter = new Counter();
-		counter->addSharedPtr();
+		delete count;
+		data = nullptr;
+		count = nullptr;
 	}
 }
 
-template <typename T>
-SharedPtr<T>::SharedPtr(const SharedPtr<T>& other)
-{
-	copyFrom(other);
+template<class T>
+void SharedPtr<T>::CopyFrom(const SharedPtr<T>& other) {
+	data = other.data;
+	count = other.count;
+	(*count)++;
 }
 
-template <typename T>
-void SharedPtr<T>::moveFrom(SharedPtr<T>&& other) noexcept
-{
+template<class T>
+void SharedPtr<T>::MoveFrom(SharedPtr<T>&& other) {
 	data = other.data;
+	count = other.count;
 	other.data = nullptr;
-
-	counter = other.counter;
-	other.counter = nullptr;
-}
-template <typename T>
-SharedPtr<T>::SharedPtr(SharedPtr<T>&& other) noexcept
-{
-	moveFrom(std::move(other));
-}
-template <typename T>
-SharedPtr<T>& SharedPtr<T>::operator=(SharedPtr<T>&& other) noexcept
-{
-	if (this != &other)
-	{
-		free();
-		moveFrom(std::move(other));
-	}
-	return *this;
+	other.count = nullptr;
 }
 
-template <typename T>
-SharedPtr<T>& SharedPtr<T>::operator=(const SharedPtr<T>& other)
-{
-	if (this != &other)
-	{
-		free();
-		copyFrom(other);
-	}
-	return *this;
+template<class T>
+SharedPtr<T>::SharedPtr() {
+	data = nullptr;
+	count = new size_t(1);
 }
 
-template <typename T>
-const T& SharedPtr<T>::operator*() const
-{
-	if (data == nullptr)
-	{
-		throw std::runtime_error("Pointer not set");
-	}
-	return *data;
+template<class T>
+SharedPtr<T>::SharedPtr(T* ptr) {
+	this->data = ptr;
+	count = new size_t(1);
 }
 
-template <typename T>
-T& SharedPtr<T>::operator*()
-{
-	if (data == nullptr)
-	{
-		throw std::runtime_error("Pointer not set");
-	}
-	return *data;
+template<class T>
+void SharedPtr<T>::Reset() {
+	*this = SharedPtr();
 }
 
-template <typename T>
-SharedPtr<T>::~SharedPtr()
-{
-	free();
+template<class T>
+SharedPtr<T>::SharedPtr(const SharedPtr<T>& other) {
+	CopyFrom(other);
 }
 
-
-template<typename T>
-T* SharedPtr<T>::operator->() {
-	return data;
+template<class T>
+SharedPtr<T>::SharedPtr(SharedPtr<T>&& other) {
+	MoveFrom(std::move(other));
 }
 
-template<typename T>
-bool SharedPtr<T>::isNullPtr() const
+template<class T>
+bool SharedPtr<T>::Unique() const {
+	return RefCount() == 1;
+}
+
+template<class T>
+bool SharedPtr<T>::IsNullPtr() const
 {
 	return data == nullptr;
 }
 
-template<typename T>
+template<class T>
+bool SharedPtr<T>::operator!() const {
+	return data == nullptr;
+}
+
+template<class T>
+const T& SharedPtr<T>::operator*() const {
+	return *data;
+}
+
+template<class T>
+T& SharedPtr<T>::operator*() {
+	return *data;
+}
+
+template<class T>
 const T* SharedPtr<T>::operator->() const {
 	return data;
+}
+
+template<class T>
+T* SharedPtr<T>::operator->() {
+	return data;
+}
+
+template<class T>
+bool SharedPtr<T>::operator==(const SharedPtr& other)
+{
+	return data == other.data;
+}
+
+template<class T>
+bool SharedPtr<T>::operator!=(const SharedPtr& other)
+{
+	return !(this == other);
+}
+
+template<class T>
+size_t SharedPtr<T>::RefCount() const {
+	return *count;
+}
+
+template<class T>
+SharedPtr<T>& SharedPtr<T>::operator=(const SharedPtr<T>& other) {
+	if (this != &other) {
+		Free();
+		CopyFrom(other);
+	}
+
+	return *this;
+}
+
+template<class T>
+SharedPtr<T>& SharedPtr<T>::operator=(SharedPtr<T>&& other) noexcept {
+	if (this != &other) {
+		Free();
+		MoveFrom(std::move(other));
+	}
+
+	return *this;
+}
+
+template<class T>
+SharedPtr<T>::~SharedPtr() {
+	Free();
 }

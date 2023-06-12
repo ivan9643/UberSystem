@@ -10,7 +10,7 @@ template<class T>
 void ReadData(const MyString& prompt, T& data)
 {
 	while (true) {
-		cout << prompt << endl;
+		cout << prompt;
 		cin >> data;
 		if (cin.fail()) {
 			cin.clear();
