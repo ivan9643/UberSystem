@@ -1,5 +1,6 @@
 #include "User.h"
 #include "../Helpers/HelperFunctions.h"
+#include "../Entities/Order.h"
 
 using std::cout;
 using std::cin;
@@ -100,7 +101,8 @@ void User::SetLastName(const MyString& lastName)
 
 void User::SetMoney(double money)
 {
-	if (money >= 0) this->money = money;
+	if (money < 0) throw std::runtime_error("money can't be < 0");
+	this->money = money;
 }
 
 void User::PrintData() const
@@ -110,6 +112,45 @@ void User::PrintData() const
 	cout << "first name: " << firstName << endl;
 	cout << "last name: " << lastName << endl;
 	cout << "money: " << money << endl;
+}
+
+
+const MyVector<SharedPtr<Order>>& User::GetPendingOrders() const
+{
+	return pendingOrders;
+}
+
+const MyVector<SharedPtr<Order>>& User::GetCompletedOrders() const
+{
+	return completedOrders;
+}
+
+void User::AddToPendingOrders(const SharedPtr<Order>& order)
+{
+	pendingOrders.PushBack(order);
+}
+
+void User::RemoveFromPendingOrders(const SharedPtr<Order>& order)
+{
+	pendingOrders.Remove(order);
+}
+
+void User::AddToCompletedOrders(const SharedPtr<Order>& order)
+{
+	completedOrders.PushBack(order);
+}
+
+SharedPtr<Order>& User::GetPendingOrder(size_t orderId)
+{
+	for (size_t i = 0; i < pendingOrders.GetCurrentSize(); i++)
+	{
+		if (pendingOrders[i]->GetId() == orderId)
+		{
+			return pendingOrders[i];
+		}
+	}
+	MyString errorMessage = "order with id - " + MyString(orderId) + " is not in pending orders";
+	throw std::runtime_error(errorMessage.c_str());
 }
 
 void User::SaveToFile(std::ofstream& file) const

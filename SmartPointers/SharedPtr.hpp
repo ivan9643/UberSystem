@@ -25,8 +25,8 @@ public:
 	const T* operator->() const;
 	T* operator->();
 
-	bool operator==(const SharedPtr& other);
-	bool operator!=(const SharedPtr& other);
+	bool operator==(const SharedPtr<T>& other);
+	bool operator!=(const SharedPtr<T>& other);
 
 	bool Unique() const;
 	bool IsNullPtr() const;
@@ -131,13 +131,13 @@ T* SharedPtr<T>::operator->() {
 }
 
 template<class T>
-bool SharedPtr<T>::operator==(const SharedPtr& other)
+bool SharedPtr<T>::operator==(const SharedPtr<T>& other)
 {
 	return data == other.data;
 }
 
 template<class T>
-bool SharedPtr<T>::operator!=(const SharedPtr& other)
+bool SharedPtr<T>::operator!=(const SharedPtr<T>& other)
 {
 	return !(this == other);
 }

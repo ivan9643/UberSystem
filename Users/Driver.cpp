@@ -1,4 +1,5 @@
 #include "Driver.h"
+#include "../Entities/Order.h"
 #include "../Helpers/HelperFunctions.h"
 
 using std::cout;
@@ -52,9 +53,14 @@ size_t Driver::GetCarPassengersCountCapacity() const
 	return carPassengersCountCapacity;
 }
 
-const MyVector<SharedPtr<Order>>& Driver::GetPendingOrders() const
+double Driver::GetRatingValue() const
 {
-	return pendingOrders;
+	return rating.value;
+}
+
+size_t Driver::GetRatingVotesCount() const
+{
+	return rating.votesCount;
 }
 
 void Driver::SaveToFile(std::ofstream& file) const
@@ -72,8 +78,7 @@ void Driver::PrintData() const
 	cout << "car passengers count capacity: " << carPassengersCountCapacity << endl;
 	cout << "phone number: " << phoneNumber<< endl;
 	cout << "current location:" << endl;
-	cout << "   name: " << currentLocation.GetName() << endl;
-	cout << "   coordinates: (" << currentLocation.GetCoordinates().x << ", " << currentLocation.GetCoordinates().y << ")" << endl;
+	currentLocation.PrintDataWithoutDetails();
 	cout << "rating: " << endl;
 	cout << "   value: " << rating.value << endl;
 	cout << "   votes count: " << rating.votesCount << endl;
@@ -84,6 +89,35 @@ void Driver::Rate(double value)
 	if (value < 1 || value > 5) throw std::runtime_error("rating must be in [1, 5]");
 	rating.AddVote(value);
 }
+
+void Driver::ReceivePayment(double amount)
+{
+	if (amount < 0) throw std::runtime_error("amount must be > 0");
+	money += amount;
+}
+
+//void Driver::AcceptOrder(size_t orderId, size_t minutes, double price)
+//{
+//	for (size_t i = 0; i < pendingOrders.GetCurrentSize(); i++)
+//	{
+//		if (pendingOrders[i]->GetId() == orderId)
+//		{
+//			switch (pendingOrders[i]->GetStatus())
+//			{
+//			case waiting:
+//				pendingOrders[i]->Accept(minutes, price);
+//				return;
+//				break;
+//			case accepted:
+//				MyString errorMessage = "order with id - " + MyString(orderId) + " is already accepted";
+//				throw std::runtime_error(errorMessage.c_str());
+//				break;
+//			}
+//		}
+//	}
+//	MyString errorMessage = "order with id - " + MyString(orderId) + " is not in pending orders";
+//	throw std::runtime_error(errorMessage.c_str());
+//}
 
 void Driver::ReadFromFile(std::ifstream& file)
 {
@@ -111,11 +145,6 @@ void Driver::SetCurrentLocation(const Address& currentLocation)
 void Driver::SetCarPassengersCountCapacity(size_t carPassengersCountCapacity)
 {
 	this->carPassengersCountCapacity = carPassengersCountCapacity;
-}
-
-void Driver::AddOrder(SharedPtr<Order>& order)
-{
-	pendingOrders.PushBack(order);
 }
 
 Driver::Driver(const MyString& username, const MyString& password, const MyString& firstName,

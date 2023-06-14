@@ -6,7 +6,7 @@ using std::endl;
 
 bool Address::IsNameValid(const MyString& name) const
 {
-	MyString errorMessage = "address name length must be in [" + MyString(MIN_NAME_LENGTH) + ", " + 
+	MyString errorMessage = "address name length must be in [" + MyString(MIN_NAME_LENGTH) + ", " +
 		MyString(MAX_NAME_LENGTH) + "]";
 	if (name.GetLength() < MIN_NAME_LENGTH) throw std::runtime_error(errorMessage.c_str());
 	if (name.GetLength() > MAX_NAME_LENGTH) throw std::runtime_error(errorMessage.c_str());
@@ -63,6 +63,18 @@ void Address::SetDetails(const MyString& details)
 void Address::SetCoordinates(const Point& coordinates)
 {
 	this->coordinates = coordinates;
+}
+
+void Address::PrintData() const
+{
+	PrintDataWithoutDetails();
+	cout << "   details: " << details << endl;
+}
+
+void Address::PrintDataWithoutDetails() const
+{
+	cout << "   name: " << name << endl;
+	cout << "   coordinates: (" << coordinates.x << ", " << coordinates.y << ")" << endl;
 }
 
 void Address::SaveToFile(std::ofstream& file) const

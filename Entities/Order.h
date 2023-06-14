@@ -1,16 +1,19 @@
 #pragma once
-#include "../Users/Client.h"
 #include "Address.h"
 #include "../SmartPointers/SharedPtr.hpp"
 #include "../Utilities/MyVector.hpp"
+#include "../Users/Client.h"
+#include "../Users/Driver.h"
 
-class Driver;
+using std::cout;
+using std::endl;
 
 enum OrderStatus {
-	waiting,
+	waitingToBeAccepted,
 	accepted,
-	canceled,
-	finished,
+	cancelled,
+	waitingPayment,
+	completed,
 };
 
 class Order {
@@ -18,17 +21,20 @@ class Order {
 
 	Address clientCurrentLocation;
 	Address destination;
-	size_t passengersCount = 0;
+	size_t passengersCount;
 	size_t id = GetNextId(); //make it work when reading orders from file
-	SharedPtr<Client> client = nullptr;
+	OrderStatus status = waitingToBeAccepted;
+
+	size_t minutes = 0;
+	double price = 0;
+
+	SharedPtr<Client> client;
 	SharedPtr<Driver> driver = nullptr;
-	OrderStatus status = waiting;
 	MyVector<SharedPtr<Driver>> declinedBy;
 
 	static size_t GetNextId();
 
 public:
-	//Order();
 	Order(const Address& clientCurrentLocation, const Address& destination, size_t passengersCount,
 		const SharedPtr<Client>& client);
 
@@ -36,10 +42,22 @@ public:
 	const Address& GetDestination() const;
 	size_t GetPassengersCount() const;
 	size_t GetId() const;
-	const MyVector<SharedPtr<Driver>> GetDeclinedBy() const;
+	OrderStatus GetStatus() const;
+	double GetPrice() const;
+	SharedPtr<Client>& GetClient();
+	SharedPtr<Driver>& GetDriver();
+	const MyVector<SharedPtr<Driver>>& GetDeclinedBy() const;
 
 	void SetDriver(const SharedPtr<Driver>& driver);
+	void Accept(size_t minutes);
+	void WaitingPayment(double price);
+	void Complete();
+	void Decline(const SharedPtr<Driver>& driver);
+	void Cancel();
 	
+	void PrintStatus() const;
+	void PrintDataDriverView() const;
+	void PrintDataClientView() const;
 	void PrintData() const;
 
 	void SaveToFile(std::ofstream& file) const;

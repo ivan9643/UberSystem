@@ -27,7 +27,8 @@ public:
 
 	size_t GetCapacity() const;
 	size_t GetCurrentSize() const;
-	T* GetData();
+	//T* GetData();
+	size_t IndexOf(const T& el) const;
 	bool IsEmpty() const;
 	bool Contains(const T& el) const;
 
@@ -35,9 +36,10 @@ public:
 	const T& operator[](size_t i) const;
 
 	void Clear();
-	void PushBack(const T el);
+	void PushBack(const T& el);
 	void PopBack();
-	void Insert(size_t index, const T el);
+	void Remove(const T& el);
+	void Insert(size_t index, const T& el);
 	void Swap(size_t i, size_t j);
 
 	~MyVector();
@@ -89,7 +91,7 @@ void MyVector<T>::Free()
 template<typename T>
 MyVector<T>::MyVector()
 {
-	capacity = 1;
+	capacity = 8;
 	data = new T[capacity];
 }
 
@@ -170,10 +172,20 @@ size_t MyVector<T>::GetCurrentSize() const
 	return currentSize;
 }
 
+//template<typename T>
+//T* MyVector<T>::GetData()
+//{
+//	return data;
+//}
+
 template<typename T>
-T* MyVector<T>::GetData()
+size_t MyVector<T>::IndexOf(const T& el) const
 {
-	return data;
+	for (size_t i = 0; i < currentSize; i++)
+	{
+		if (data[i] == el) return i;
+	}
+	throw std::runtime_error("vector doesn't contain such element");
 }
 
 template<typename T>
@@ -213,7 +225,7 @@ void MyVector<T>::Clear()
 }
 
 template<typename T>
-void MyVector<T>::PushBack(const T el)
+void MyVector<T>::PushBack(const T& el)
 {
 	if (currentSize == capacity) Resize(capacity * 2);
 	data[currentSize++] = el;
@@ -227,7 +239,18 @@ void MyVector<T>::PopBack()
 }
 
 template<typename T>
-void MyVector<T>::Insert(size_t index, const T el)
+void MyVector<T>::Remove(const T& el)
+{
+	size_t ind = IndexOf(el);
+	for (size_t i = ind; i < currentSize - 1; i++)
+	{
+		data[i] = data[i + 1];
+	}
+	currentSize--;
+}
+
+template<typename T>
+void MyVector<T>::Insert(size_t index, const T& el)
 {
 	if (index >= currentSize) throw std::runtime_error("index out of range");
 	if (currentSize == capacity) Resize(capacity * 2);

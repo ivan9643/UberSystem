@@ -35,6 +35,9 @@ public:
 	void SetDetails(const MyString& details);
 	void SetCoordinates(const Point& coordinates);
 
+	void PrintData() const;
+	void PrintDataWithoutDetails() const;
+
 	void SaveToFile(std::ofstream& file) const;
 	void ReadFromFile(std::ifstream& file);
 };

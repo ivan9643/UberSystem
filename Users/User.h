@@ -1,11 +1,15 @@
 #pragma once
 #include <fstream>
 #include "../Utilities/MyString.h"
+#include "../Utilities/MyVector.hpp"
+#include "../SmartPointers/SharedPtr.hpp"
 
 enum class Property {
 	username,
 	password,
 };
+
+class Order;
 
 const size_t MIN_LENGTH = 3;
 const size_t MAX_LENGTH = 25; 
@@ -19,7 +23,8 @@ protected:
 	size_t passHash = 0;
 	double money = 0;
 	size_t userId; //make this
-	size_t completedOrders; //count completed orders
+	MyVector<SharedPtr<Order>> pendingOrders;
+	MyVector<SharedPtr<Order>> completedOrders;
 
 	void SetPassHash(const MyString& password);
 
@@ -43,6 +48,13 @@ public:
 	void SetMoney(double money);
 
 	virtual void PrintData() const;
+
+	const MyVector<SharedPtr<Order>>& GetPendingOrders() const;
+	const MyVector<SharedPtr<Order>>& GetCompletedOrders() const;
+	SharedPtr<Order>& GetPendingOrder(size_t orderId);
+	void AddToPendingOrders(const SharedPtr<Order>& order); //check if it must be const
+	void RemoveFromPendingOrders(const SharedPtr<Order>& order);
+	void AddToCompletedOrders(const SharedPtr<Order>& order);
 
 	virtual void SaveToFile(std::ofstream& file) const;
 	virtual void ReadFromFile(std::ifstream& file);

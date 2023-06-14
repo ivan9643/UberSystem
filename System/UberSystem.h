@@ -15,8 +15,9 @@ enum class UserType {
 class UberSystem {
 	MyVector<SharedPtr<Client>> clients;
 	MyVector<SharedPtr<Driver>> drivers;
-	MyVector<SharedPtr<Order>> completedOrders;
 	MyVector<SharedPtr<Order>> pendingOrders;
+	MyVector<SharedPtr<Order>> cancelledOrders;
+	MyVector<SharedPtr<Order>> completedOrders;
 	SharedPtr<Client> loggedClient;
 	SharedPtr<Driver> loggedDriver;
 	UserType loggedUserType = UserType::none;
@@ -42,14 +43,28 @@ class UberSystem {
 
 	void LoggedInClient();
 	void ClientAddMoney();
-	void ClientOrder();
+	void ClientMakeOrder();
+	void ClientCheckOrders();
+	void ClientCancelOrder();
+	void ClientPayOrder();
+	void ClientRateDriver();
 
 	void MakeOrder(const Address& clientCurrentLocation, const Address& destination, size_t passengersCount);
 	void SetNearestDriver(SharedPtr<Order>& order);
+	void ClientPrintOrders(const MyVector<SharedPtr<Order>>& orders, const MyString ordersType) const;
 
 	void LoggedInDriver();
 	void DriverChangeCurrentLocation();
-	void DriverCheckPendingOrders();
+	void DriverCheckOrders();
+	void DriverAcceptOrder();
+	void DriverFinishOrder();
+	void DriverDeclineOrder();
+
+	void DriverPrintOrders(const MyVector<SharedPtr<Order>>& orders, const MyString ordersType) const;
+
+	void ViewUsers() const;
+	void ViewOrders() const;
+	void PrintOrders(const MyVector<SharedPtr<Order>>& orders, const MyString ordersType) const;
 public:
 	UberSystem();
 
