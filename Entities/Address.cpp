@@ -76,15 +76,3 @@ void Address::PrintDataWithoutDetails() const
 	cout << "   name: " << name << endl;
 	cout << "   coordinates: (" << coordinates.x << ", " << coordinates.y << ")" << endl;
 }
-
-void Point::SaveToFile(std::ofstream& file) const
-{
-	file.write((const char*)&x, sizeof(x));
-	file.write((const char*)&y, sizeof(y));
-}
-
-void Point::ReadFromFile(std::ifstream& file)
-{
-	file.read((char*)&x, sizeof(x));
-	file.read((char*)&y, sizeof(y));
-}

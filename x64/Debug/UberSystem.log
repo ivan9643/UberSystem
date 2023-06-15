@@ -1,8 +1,15 @@
-﻿  Main.cpp
+﻿  Address.cpp
+  Order.cpp
+  HelperFunctions.cpp
+  Main.cpp
   Authentication.cpp
   ClientFunctions.cpp
   DriverFunctions.cpp
   UberSystem.cpp
   Users.cpp
+  Client.cpp
+  Driver.cpp
+  User.cpp
+  MyString.cpp
   Generating Code...
   UberSystem.vcxproj -> C:\Users\Acer\source\repos\UberSystem\x64\Debug\UberSystem.exe

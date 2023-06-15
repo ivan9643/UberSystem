@@ -5,9 +5,6 @@
 struct Point {
 	int x = 0;
 	int y = 0;
-	//def constr
-	void SaveToFile(std::ofstream& file) const;
-	void ReadFromFile(std::ifstream& file);
 };
 
 const size_t MIN_NAME_LENGTH = 3;

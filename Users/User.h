@@ -55,7 +55,7 @@ public:
 	const MyVector<SharedPtr<Order>>& GetPendingOrders() const;
 	const MyVector<SharedPtr<Order>>& GetCompletedOrders() const;
 	SharedPtr<Order>& GetPendingOrder(size_t orderId);
-	void AddToPendingOrders(const SharedPtr<Order>& order); //check if it must be const
+	void AddToPendingOrders(const SharedPtr<Order>& order);
 	void RemoveFromPendingOrders(const SharedPtr<Order>& order);
 	void AddToCompletedOrders(const SharedPtr<Order>& order);
 };

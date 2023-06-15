@@ -20,7 +20,7 @@ class Order {
 	Address clientCurrentLocation;
 	Address destination;
 	size_t passengersCount;
-	size_t id = GetNextId(); //make it work when reading orders from file
+	size_t id = GetNextId();
 	OrderStatus status = waitingToBeAccepted;
 
 	size_t minutes = 0;
