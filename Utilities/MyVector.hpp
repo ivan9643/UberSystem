@@ -27,7 +27,6 @@ public:
 
 	size_t GetCapacity() const;
 	size_t GetCurrentSize() const;
-	//T* GetData();
 	size_t IndexOf(const T& el) const;
 	bool IsEmpty() const;
 	bool Contains(const T& el) const;
@@ -43,7 +42,6 @@ public:
 	void Swap(size_t i, size_t j);
 
 	~MyVector();
-	friend class UberSystem;
 };
 
 template<typename T>
@@ -171,12 +169,6 @@ size_t MyVector<T>::GetCurrentSize() const
 {
 	return currentSize;
 }
-
-//template<typename T>
-//T* MyVector<T>::GetData()
-//{
-//	return data;
-//}
 
 template<typename T>
 size_t MyVector<T>::IndexOf(const T& el) const

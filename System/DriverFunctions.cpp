@@ -47,7 +47,7 @@ void UberSystem::DriverChangeCurrentLocation()
 	}
 }
 
-void UberSystem::DriverCheckOrders()
+void UberSystem::DriverCheckOrders() const
 {
 	CheckForLoggedDriver();
 

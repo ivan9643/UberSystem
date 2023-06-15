@@ -108,7 +108,12 @@ void Order::PrintDataDriverView() const
 void Order::PrintDataClientView() const {
 	cout << "order id: " << id << endl;
 	PrintStatus();
-	if (status == accepted || status == waitingPayment)
+	cout << "current location: " << endl;
+	clientCurrentLocation.PrintData();
+	cout << "destination: " << endl;
+	destination.PrintData();
+	cout << "passengers count: " << passengersCount << endl;
+	if (status == accepted || status == waitingPayment || status == completed)
 	{
 		cout << "driver:" << endl;
 		cout << "   username: " << driver->GetUsername() << endl;
@@ -129,28 +134,6 @@ void Order::Accept(size_t minutes)
 {
 	status = accepted;
 	this->minutes = minutes;
-}
-
-void Order::SaveToFile(std::ofstream& file) const
-{
-	clientCurrentLocation.SaveToFile(file);
-	destination.SaveToFile(file);
-	file.write((const char*)&passengersCount, sizeof(passengersCount));
-	file.write((const char*)&id, sizeof(id));
-	file.write((const char*)&status, sizeof(status));
-	client->SaveToFile(file);
-	driver->SaveToFile(file);
-}
-
-void Order::ReadFromFile(std::ifstream& file)
-{
-	clientCurrentLocation.ReadFromFile(file);
-	destination.ReadFromFile(file);
-	file.read((char*)&passengersCount, sizeof(passengersCount));
-	file.read((char*)&id, sizeof(id));
-	file.read((char*)&status, sizeof(status));
-	client->ReadFromFile(file);
-	driver->ReadFromFile(file);
 }
 
 void Order::WaitingPayment(double price)
@@ -183,13 +166,13 @@ void Order::PrintData() const
 	cout << "   username: " << client->GetUsername() << endl;
 	cout << "   first name: " << client->GetFirstName() << endl;
 	cout << "   last name: " << driver->GetLastName() << endl;
-	cout << "   location: " << endl;
+	cout << "current location: " << endl;
 	clientCurrentLocation.PrintData();
 	cout << "destination: " << endl;
 	destination.PrintData();
 	cout << "passengers count: " << passengersCount << endl;
 	PrintStatus();
-	if (status == accepted || status == waitingPayment)
+	if (status == accepted || status == waitingPayment || status == completed)
 	{
 		cout << "driver:" << endl;
 		cout << "   username: " << driver->GetUsername() << endl;

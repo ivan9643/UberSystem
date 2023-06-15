@@ -89,8 +89,5 @@
     <ClInclude Include="SmartPointers\SharedPtr.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SmartPointers\UniquePtr.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

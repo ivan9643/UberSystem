@@ -17,8 +17,6 @@ enum OrderStatus {
 };
 
 class Order {
-	static size_t nextId;
-
 	Address clientCurrentLocation;
 	Address destination;
 	size_t passengersCount;
@@ -32,9 +30,11 @@ class Order {
 	SharedPtr<Driver> driver = nullptr;
 	MyVector<SharedPtr<Driver>> declinedBy;
 
+	static size_t nextId;
 	static size_t GetNextId();
 
 public:
+	Order() = default;
 	Order(const Address& clientCurrentLocation, const Address& destination, size_t passengersCount,
 		const SharedPtr<Client>& client);
 
@@ -59,7 +59,4 @@ public:
 	void PrintDataDriverView() const;
 	void PrintDataClientView() const;
 	void PrintData() const;
-
-	void SaveToFile(std::ofstream& file) const;
-	void ReadFromFile(std::ifstream& file);
 };

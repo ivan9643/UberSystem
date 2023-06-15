@@ -6,7 +6,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-bool Driver::IsCarNumberValid(const MyString& carNumber)
+bool Driver::IsCarNumberValid(const MyString& carNumber) const
 {
 	MyString errorMessage = "car number length must be in [" + MyString(MIN_CAR_NUMBER_LENGTH) + ", " +
 		MyString(MAX_CAR_NUMBER_LENGTH) + "]\ncar number must contain only letters and digits";
@@ -21,7 +21,7 @@ bool Driver::IsCarNumberValid(const MyString& carNumber)
 	return true;
 }
 
-bool Driver::IsPhoneNumberValid(const MyString& phoneNumber)
+bool Driver::IsPhoneNumberValid(const MyString& phoneNumber) const
 {
 	MyString errorMessage = "phone number must contain " + MyString(PHONE_NUMBER_LENGTH) + " digits";
 	if (phoneNumber.GetLength() != PHONE_NUMBER_LENGTH) throw std::runtime_error(errorMessage.c_str());
@@ -63,14 +63,6 @@ size_t Driver::GetRatingVotesCount() const
 	return rating.votesCount;
 }
 
-void Driver::SaveToFile(std::ofstream& file) const
-{
-	User::SaveToFile(file);
-	carNumber.SaveToFile(file);
-	phoneNumber.SaveToFile(file);
-	currentLocation.SaveToFile(file);
-}
-
 void Driver::PrintData() const
 {
 	User::PrintData();
@@ -94,37 +86,6 @@ void Driver::ReceivePayment(double amount)
 {
 	if (amount < 0) throw std::runtime_error("amount must be > 0");
 	money += amount;
-}
-
-//void Driver::AcceptOrder(size_t orderId, size_t minutes, double price)
-//{
-//	for (size_t i = 0; i < pendingOrders.GetCurrentSize(); i++)
-//	{
-//		if (pendingOrders[i]->GetId() == orderId)
-//		{
-//			switch (pendingOrders[i]->GetStatus())
-//			{
-//			case waiting:
-//				pendingOrders[i]->Accept(minutes, price);
-//				return;
-//				break;
-//			case accepted:
-//				MyString errorMessage = "order with id - " + MyString(orderId) + " is already accepted";
-//				throw std::runtime_error(errorMessage.c_str());
-//				break;
-//			}
-//		}
-//	}
-//	MyString errorMessage = "order with id - " + MyString(orderId) + " is not in pending orders";
-//	throw std::runtime_error(errorMessage.c_str());
-//}
-
-void Driver::ReadFromFile(std::ifstream& file)
-{
-	User::ReadFromFile(file);
-	carNumber.ReadFromFile(file);
-	phoneNumber.ReadFromFile(file);
-	currentLocation.ReadFromFile(file);
 }
 
 void Driver::SetCarNumber(const MyString& carNumber)

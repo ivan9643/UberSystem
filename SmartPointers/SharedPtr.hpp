@@ -28,12 +28,10 @@ public:
 	bool operator==(const SharedPtr<T>& other);
 	bool operator!=(const SharedPtr<T>& other);
 
-	bool Unique() const;
 	bool IsNullPtr() const;
 
 	bool operator!() const;
-
-
+	
 	size_t RefCount() const;
 
 	SharedPtr<T>& operator=(const SharedPtr<T>&);
@@ -92,11 +90,6 @@ SharedPtr<T>::SharedPtr(const SharedPtr<T>& other) {
 template<class T>
 SharedPtr<T>::SharedPtr(SharedPtr<T>&& other) {
 	MoveFrom(std::move(other));
-}
-
-template<class T>
-bool SharedPtr<T>::Unique() const {
-	return RefCount() == 1;
 }
 
 template<class T>

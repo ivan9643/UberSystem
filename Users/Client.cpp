@@ -31,12 +31,3 @@ void Client::RemoveFromCancelledOrders(const SharedPtr<Order>& order)
 {
 	cancelledOrders.Remove(order);
 }
-
-//void Client::SaveToFile(std::ofstream& file) const
-//{
-//
-//}
-//
-//void Client::ReadFromFile(std::ifstream& file)
-//{
-//}

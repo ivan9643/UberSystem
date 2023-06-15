@@ -7,14 +7,14 @@ using std::endl;
 
 int UberSystem::IndexByUsername(const MyString& username, UserType& type) const
 {
-	for (int i = 0; i < clients.currentSize; i++)
+	for (int i = 0; i < clients.GetCurrentSize(); i++)
 	{
 		if (clients[i]->GetUsername() == username) {
 			type = UserType::client;
 			return i;
 		}
 	}
-	for (int i = 0; i < drivers.currentSize; i++)
+	for (int i = 0; i < drivers.GetCurrentSize(); i++)
 	{
 		if (drivers[i]->GetUsername() == username) {
 			type = UserType::driver;

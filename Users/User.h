@@ -22,9 +22,12 @@ protected:
 	MyString lastName;
 	size_t passHash = 0;
 	double money = 0;
-	size_t userId; //make this
+	size_t id = GetNextId();
 	MyVector<SharedPtr<Order>> pendingOrders;
 	MyVector<SharedPtr<Order>> completedOrders;
+
+	static size_t nextId;
+	static size_t GetNextId();
 
 	void SetPassHash(const MyString& password);
 
@@ -55,7 +58,4 @@ public:
 	void AddToPendingOrders(const SharedPtr<Order>& order); //check if it must be const
 	void RemoveFromPendingOrders(const SharedPtr<Order>& order);
 	void AddToCompletedOrders(const SharedPtr<Order>& order);
-
-	virtual void SaveToFile(std::ofstream& file) const;
-	virtual void ReadFromFile(std::ifstream& file);
 };

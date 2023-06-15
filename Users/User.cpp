@@ -6,6 +6,13 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+size_t User::nextId = 1;
+
+size_t User::GetNextId()
+{
+	return nextId++;
+}
+
 void User::SetPassHash(const MyString& password)
 {
 	if (IsUsernameOrPasswordValid(password, Property::password)) passHash = HashPassword(password.c_str());;
@@ -59,6 +66,11 @@ User::User(const MyString& username, const MyString& password, const MyString& f
 	SetMoney(money);
 }
 
+size_t User::GetUserId() const
+{
+	return id;
+}
+
 const MyString& User::GetUsername() const
 {
 	return username;
@@ -107,7 +119,7 @@ void User::SetMoney(double money)
 
 void User::PrintData() const
 {
-	cout << "user id: " << userId << endl;
+	cout << "user id: " << id << endl;
 	cout << "username: " << username << endl;
 	cout << "first name: " << firstName << endl;
 	cout << "last name: " << lastName << endl;
@@ -151,22 +163,4 @@ SharedPtr<Order>& User::GetPendingOrder(size_t orderId)
 	}
 	MyString errorMessage = "order with id - " + MyString(orderId) + " is not in pending orders";
 	throw std::runtime_error(errorMessage.c_str());
-}
-
-void User::SaveToFile(std::ofstream& file) const
-{
-	username.SaveToFile(file);
-	firstName.SaveToFile(file);
-	lastName.SaveToFile(file);
-	file.write((const char*)&passHash, sizeof(passHash));
-	file.write((const char*)&money, sizeof(money));
-}
-
-void User::ReadFromFile(std::ifstream& file)
-{
-	username.ReadFromFile(file);
-	firstName.ReadFromFile(file);
-	lastName.ReadFromFile(file);
-	file.read((char*)&passHash, sizeof(passHash));
-	file.read((char*)&money, sizeof(money));
 }

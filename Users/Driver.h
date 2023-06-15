@@ -23,8 +23,8 @@ class Driver : public User {
 	Rating rating;
 	size_t carPassengersCountCapacity;
 
-	bool IsCarNumberValid(const MyString& carNumber);
-	bool IsPhoneNumberValid(const MyString& phoneNumber);
+	bool IsCarNumberValid(const MyString& carNumber) const;
+	bool IsPhoneNumberValid(const MyString& phoneNumber) const;
 
 public:
 	Driver() = default;
@@ -47,10 +47,4 @@ public:
 	void PrintData() const override;
 	void Rate(double value);
 	void ReceivePayment(double amount);
-
-	//only if pending order consists of waitng or accepted orders
-	//void AcceptOrder(size_t orderId, size_t minutes, double price); 
-
-	void SaveToFile(std::ofstream& file) const override;
-	void ReadFromFile(std::ifstream& file) override;
 };

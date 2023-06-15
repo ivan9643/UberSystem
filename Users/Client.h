@@ -18,7 +18,4 @@ public:
 	void AddToCancelledOrders(const SharedPtr<Order>& order); //check if it must be const
 	void RemoveFromCancelledOrders(const SharedPtr<Order>& order);
 
-	//void SaveToFile(std::ofstream& file) const override;
-	//void ReadFromFile(std::ifstream& file) override;
-
 };

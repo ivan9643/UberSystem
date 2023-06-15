@@ -1,6 +1,8 @@
 #pragma once
 #include "../Utilities/MyString.h"
-#include <limits> //this too
+#include "../Utilities/MyVector.hpp"
+#include "../SmartPointers/SharedPtr.hpp"
+#include <limits>
 
 using std::cout;
 using std::cin;
@@ -14,7 +16,7 @@ void ReadData(const MyString& prompt, T& data)
 		cin >> data;
 		if (cin.fail()) {
 			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // check if this constant is allowed to use
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			cout << "invalid input" << endl;
 		}
 		else break;

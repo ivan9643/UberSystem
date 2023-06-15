@@ -129,7 +129,7 @@ void UberSystem::SetNearestDriver(SharedPtr<Order>& order)
 };
 
 
-void UberSystem::ClientCheckOrders()
+void UberSystem::ClientCheckOrders() const
 {
 	CheckForLoggedClient();
 
@@ -241,7 +241,7 @@ void UberSystem::ClientRateDriver()
 		{
 			if (completedOrders[i]->GetDriver()->GetUsername() == driverUsername) {
 				completedOrders[i]->GetDriver()->Rate(ratingValue);
-				cout << "successfully rated driver \"" << driverUsername << "\" with " << ratingValue;
+				cout << "successfully rated driver \"" << driverUsername << "\"";
 				return;
 			}
 		}

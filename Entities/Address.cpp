@@ -77,20 +77,6 @@ void Address::PrintDataWithoutDetails() const
 	cout << "   coordinates: (" << coordinates.x << ", " << coordinates.y << ")" << endl;
 }
 
-void Address::SaveToFile(std::ofstream& file) const
-{
-	name.SaveToFile(file);
-	details.SaveToFile(file);
-	coordinates.SaveToFile(file);
-}
-
-void Address::ReadFromFile(std::ifstream& file)
-{
-	name.ReadFromFile(file);
-	details.ReadFromFile(file);
-	coordinates.ReadFromFile(file);
-}
-
 void Point::SaveToFile(std::ofstream& file) const
 {
 	file.write((const char*)&x, sizeof(x));

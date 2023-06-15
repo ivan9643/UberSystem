@@ -4,8 +4,6 @@
 #include "../Entities/Order.h"
 #include "../Utilities/MyVector.hpp"
 
-const char DATA_FILE_NAME[] = "data.txt";
-
 enum class UserType {
 	client,
 	driver,
@@ -44,7 +42,7 @@ class UberSystem {
 	void LoggedInClient();
 	void ClientAddMoney();
 	void ClientMakeOrder();
-	void ClientCheckOrders();
+	void ClientCheckOrders() const;
 	void ClientCancelOrder();
 	void ClientPayOrder();
 	void ClientRateDriver();
@@ -55,7 +53,7 @@ class UberSystem {
 
 	void LoggedInDriver();
 	void DriverChangeCurrentLocation();
-	void DriverCheckOrders();
+	void DriverCheckOrders() const;
 	void DriverAcceptOrder();
 	void DriverFinishOrder();
 	void DriverDeclineOrder();
@@ -65,17 +63,12 @@ class UberSystem {
 	void ViewUsers() const;
 	void ViewOrders() const;
 	void PrintOrders(const MyVector<SharedPtr<Order>>& orders, const MyString ordersType) const;
+	void ViewTotalMoney() const;
 public:
-	UberSystem();
+	UberSystem() = default;
 
 	UberSystem(const UberSystem&) = delete;
 	void operator=(const UberSystem&) = delete;
 
 	void NotLoggedIn();
-	
-	//check if these work after changing the vectors to store pointers
-	void SaveDataInFile() const;
-	void ReadDataFromFile();
-
-	//~UberSystem(); //save data
 };

@@ -7,7 +7,7 @@ using std::cin;
 using std::endl;
 
 void UberSystem::NotLoggedIn() {
-	MyString menu = "1 - register\n2 - login\n3 - view users (testing)\n4 - view orders (testing)\n0 - exit";
+	MyString menu = "1 - register\n2 - login\n3 - view users (testing)\n4 - view orders (testing)\n5 - view total money made\n0 - exit";
 	MyString action;
 
 	while (true) {
@@ -18,6 +18,7 @@ void UberSystem::NotLoggedIn() {
 		else if (action == "2") Login();
 		else if (action == "3") ViewUsers();
 		else if (action == "4") ViewOrders();
+		else if (action == "5") ViewTotalMoney();
 		else if (action == "0") return;
 		else cout << action + " is not a valid action" << endl;
 	}
